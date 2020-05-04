@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+	<servlet>
+	<!-- 서블릿 네임으로 서블릿 클래스를 찾아갈수 있다. -->
+		<servlet-name>helloServlet</servlet-name>
+		<servlet-class>jsp.ch13.HelloServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	<!-- url을 매핑시켜줘야지 servlet이 url을 가지고 실행이 가능해진다. 톰켓이 경로를 인식할 수 있게된다. -->
+		<servlet-name>helloServlet</servlet-name>
+		<url-pattern>/ch13/hello.do</url-pattern>
+	</servlet-mapping>
+<!-- 여러개의 서블릿 클래스를 매핑하는 것이 가능하다. 여기서 주의할 것은 여기서 오타가 나면 서버가 터져요.	
+	<servlet>
+	<servlet-class>jsp.ch13.MemberServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	url을 매핑시켜줘야지 servlet이 url을 가지고 실행이 가능해진다. 톰켓이 경로를 인식할 수 있게된다.
+		<url-pattern>/ch13/Member.do</url-pattern>
+	</servlet-mapping> -->
+</web-app>
