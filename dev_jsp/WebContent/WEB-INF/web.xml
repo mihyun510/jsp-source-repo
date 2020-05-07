@@ -4,6 +4,16 @@
  		<param-name>log4jConfigLocation</param-name>
  		<param-value>/WEB-INF/classes/log4j.properties</param-value>
  	</context-param>
+ 	<servlet>
+ 		<servlet-name>mvcServlet</servlet-name>
+ 		<servlet-class>jsp.ch17.MVCServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>mvcServlet</servlet-name>
+ 		<url-pattern>*.kosmo</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	
 	<servlet>
 	<!-- 서블릿 네임으로 서블릿 클래스를 찾아갈수 있다. -->
 		<servlet-name>helloServlet</servlet-name>
@@ -24,4 +34,55 @@
 		<servlet-name>frontServlet</servlet-name>
 		<url-pattern>/ch17/shopping2.do</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>orderServlet</servlet-name>
+		<servlet-class>jsp.ch17.OrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>orderServlet</servlet-name>
+		<url-pattern>/ch17/orderInsert.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DBCPInit</servlet-name>
+		<servlet-class>jsp.ch17.DBCPInitVer2</servlet-class>
+		<!-- 디비에 필요한 정보들을 매핑해주어야된다. 초기화 느낌..? DBCPinit에서 제어역전이 필요하다. 그래야지 톰캣이 인식을 할 수있다.-->
+		<init-param>
+			<param-name>jdbcDriver</param-name>
+			<param-value>oracle.jdbc.driver.OracleDriver</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jdbcUrl</param-name>
+			<param-value>jdbc:oracle:thin:@192.168.0.23:1521:orcl11</param-value>
+		</init-param>
+		<init-param>
+			<param-name>username</param-name>
+			<param-value>scott</param-value>
+		</init-param>
+		<init-param>
+			<param-name>pw</param-name>
+			<param-value>tiger</param-value>
+		</init-param>
+		<init-param>
+		<!-- 임의로 이름을 지정해서 가져가자 상수로 적혀있다. -->
+			<param-name>poolName</param-name>
+			<param-value>chap14</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+<!-- 	<servlet> 이와같이 입력수정삭제조회 이렇게 각각의 기능에 대해서 각각의 서블이 모두 존재하는 것은 매우 비효율 적이므로 한개의 서블릿에 if문으로 조건을 나누자. 
+		<servlet-name>orderDelServlet2</servlet-name>
+		<servlet-class>jsp.ch17.OrderDeleteServlet2</servlet-class> 여기서 OrderDeleteServlet2이 존재하지 않으면 ClassNotFoundException 404가 발생한다. nullpointexception이 발생하면 500번이 일어난다.
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>orderDelServlet2</servlet-name>
+		<url-pattern>/ch17/orderDelete.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>orderUPDServlet2</servlet-name>
+		<servlet-class>jsp.ch17.OrderUpdateServlet2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>orderUPDServlet2</servlet-name>
+		<url-pattern>/ch17/orderUpdate.do</url-pattern>
+	</servlet-mapping> -->
 </web-app>

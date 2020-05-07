@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,14 @@ import org.apache.log4j.Logger;
 @WebServlet(urlPatterns = "/ch17/order.nhn") //이것은 안먹은 것인가? url이 shopping2.do가 나오는 것으로 보아 xml로 매핑한 것으로 이 서블릿 클래스를 찾아오는 것같은데 그럼 @이것으로 매핑한 것은 의미가 없어지는 것인가?
 public class OrderServlet extends HttpServlet{
 	Logger logger = Logger.getLogger(OrderServlet.class);
-
+	ServletConfig config = null;
+	public void init(ServletConfig config) throws ServletException{
+		//init메소드는 실행하면 자동으로 실행하는 콜백메소드?? 서블릿 생명주기의 생서하는 메소드로 처음에 한번은 꼭 실행되는 메소드..?
+		//초기화하는 메소드로 서버가 구동될때 자동으로 실행됨.
+		logger.info("init 호출 성공");
+		this.config = config;
+		this.init();
+	}
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		logger.info("doGet 호출성공");//한글처리가 되어있음
