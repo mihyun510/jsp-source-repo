@@ -4,6 +4,32 @@
  		<param-name>log4jConfigLocation</param-name>
  		<param-value>/WEB-INF/classes/log4j.properties</param-value>
  	</context-param>
+	<context-param>
+ 		<param-name>driver</param-name>
+ 		<param-value>oracle.jdbc.driver.OracleDriver</param-value>
+ 	</context-param>
+	<context-param>
+ 		<param-name>user</param-name>
+ 		<param-value>scott</param-value>
+ 	</context-param>
+ 	<servlet>
+ 		<servlet-name>boardAction</servlet-name>
+ 		<servlet-class>ajax.board.BoardAction</servlet-class>
+ 		<init-param>
+ 			<param-name>mem_id</param-name>
+ 			<param-value>apple</param-value>
+ 		</init-param>
+ 		<init-param>
+ 			<param-name>mem_pw</param-name>
+ 			<param-value>123</param-value>
+ 		</init-param>
+ 		<!-- <load-on-startup></load-on-startup> 을 지정해주지 않는다면 자동으로 실행되는 것이 아니라 요청이 들어오면 처리가  됨 -->
+ 	</servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>boardAction</servlet-name>
+ 		<url-pattern>/ajax/board/boardAction.ajax</url-pattern>
+ 	</servlet-mapping>
+ 	
  	<servlet>
  		<servlet-name>mvcServlet</servlet-name>
  		<servlet-class>jsp.ch17.MVCServlet</servlet-class>
@@ -12,7 +38,6 @@
  		<servlet-name>mvcServlet</servlet-name>
  		<url-pattern>*.kosmo</url-pattern>
  	</servlet-mapping>
- 	
  	
 	<servlet>
 	<!-- 서블릿 네임으로 서블릿 클래스를 찾아갈수 있다. -->
@@ -34,6 +59,7 @@
 		<servlet-name>frontServlet</servlet-name>
 		<url-pattern>/ch17/shopping2.do</url-pattern>
 	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>orderServlet</servlet-name>
 		<servlet-class>jsp.ch17.OrderServlet</servlet-class>

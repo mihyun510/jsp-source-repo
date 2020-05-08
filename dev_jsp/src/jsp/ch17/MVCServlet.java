@@ -20,8 +20,37 @@ public class MVCServlet extends HttpServlet{
 	}
 	public void doService(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		logger.info("doService 호출 성공");
+		String uri = req.getRequestURI();//member/memberList.kosmo
+		String context = req.getContextPath();//server.xml의 context path = /
+		logger.info("uri: "+uri);
+		logger.info("context: "+context); // 0 , /dev_jsp
+		String command = uri.substring(context.length()+1); // order/goods/goodsInsert.kosmo
+		logger.info("command: "+ command); // 
+		int end = command.lastIndexOf('.'); //.을 기준으로 뒤에서 부터 .의 인덱스를 구함
+		logger.info("end: "+end); //end: 23
+		command = command.substring(0, end);
+		logger.info("command: "+ command); // order/goods/goodsInsert
+		String imsi[] = null;
+		imsi = command.split("/"); // /이거 기준으로 쪼개기
+		for(String val : imsi) {
+			logger.info("val: "+ val); //memberList가 들어있움
+		}
 		MemberController memCtrl = new MemberController();
-		memCtrl.execute(req,res);
+		OrderController orderCtrl = new OrderController();
+		GoodsController goodCtrl = new GoodsController();
+		//매번 이렇게 처리할 필요가 없다. 해당하는 경우만 이것들이 각각 실행되면 된다.
+		//insert here
+		String p_choice = req.getParameter("choice");
+		if(imsi[0].equals("member")) {
+			memCtrl.execute(req,res);
+		}
+		//insert here
+		else if(imsi[0].equals("order")) {
+			orderCtrl.execute(req,res);
+		}
+		else if(imsi[0].equals("goods")) {
+			goodCtrl.execute(req,res);
+		}
 	}
 	
 	@Override
