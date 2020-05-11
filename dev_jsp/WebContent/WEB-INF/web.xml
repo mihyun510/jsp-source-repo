@@ -12,6 +12,27 @@
  		<param-name>user</param-name>
  		<param-value>scott</param-value>
  	</context-param>
+<!-- 	<error-page>
+ 		<error-code>404</error-code>
+ 		<location>/error/error404.jsp</location> 서버로 에러페이지를 정해놓았기 때문에 개발도중에 에러메세지를 볼 수 없다. 이 페이지만 보이기 때문이다.
+ 	</error-page> -->
+	<!-- <error-page>
+ 		<error-code>500</error-code>
+ 		<location>/error/error500.jsp</location>
+ 	</error-page> -->
+ 	<error-page>
+ 		<exception-type>java.lang.NullPointException</exception-type>
+ 		<location>/error/errorNullPointer.jsp</location>
+ 	</error-page>
+ 	<servlet>
+ 		<servlet-name>parameterServlet</servlet-name>
+ 		<servlet-class>jsp.ch03.ParameterServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>parameterServlet</servlet-name>
+ 		<url-pattern>/ch03/parameterAction.do</url-pattern>
+ 	</servlet-mapping>
+ 	
  	<servlet>
  		<servlet-name>boardAction</servlet-name>
  		<servlet-class>ajax.board.BoardAction</servlet-class>
