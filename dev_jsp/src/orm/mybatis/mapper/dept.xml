@@ -11,6 +11,13 @@
 			where empno=#{empno} Map<String, Object> map.put("empno", 7566);이렇게 쓸수 있으니 위와같이 쓰시가 가능하다.
 	</delete> -->
 	<select id="deptList" parameterType="map" resultType="map">
-		select deptno, dname from dept
+		select deptno, dname, loc from dept
+	</select>
+	
+	<select id="deptList2" parameterType="int" resultType="map">
+		select deptno, dname, loc from dept
+		<where>
+			deptno = #{deptno}
+		</where>
 	</select>
 </mapper>
