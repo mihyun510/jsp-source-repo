@@ -28,7 +28,11 @@ public class DeptController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		logger.info("doGet호출 성공");
-		
+		DeptDao dDao = new DeptDao();
+		List<Map<String, Object>> deptList = dDao.deptList();
+		req.setAttribute("deptList", deptList);
+		RequestDispatcher view = req.getRequestDispatcher("jsonDeptList.jsp");
+		view.forward(req, res);
 	}
 
 }

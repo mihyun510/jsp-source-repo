@@ -23,6 +23,8 @@ public class DeptDao {
 			sqlMapper = new SqlSessionFactoryBuilder().build(reader); //프로펄타이즈는 configuration안에 넣어놈 그래서 필요가 없어요. SqlSessionFactoryBuilder()는 인스턴스화되어 사용되거 던져질 수 있다. 팩토리를 생성후 유지할 필요가 없다. 연결됬으면 끝.
 			SqlSession sqlSec = sqlMapper.openSession();//세션 인증을 받아야된다. 접속하는 자원이 인증받았다는 것을..?
 			logger.info("커넥션 얻기 성공==>"+sqlSec);
+			deptList = sqlSec.selectList("deptList");
+			logger.info("deptList.size: "+ deptList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
