@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function start(){
+		location.href="test1.jsp";
+	}
+</script>
+</head>
+<body>
+<form method="get" action="test1.jsp">
+	<input type="hidden" name="h_no" value="20200515001"/>
+	<input type="hidden" name="h_name" value="이순신"/>
+	<input type="submit" value="submit_시험시작"/><!-- 전송방식2: submit방식 - form전송과 함께 사용 그러니 form안에 있어야됨.-->
+</form>
+<button onclick="start()">버튼 시험시작</button><!-- 전송방식1: 버튼으로 인해 함수를 통해서 전송  -->
+</body>
+</html>
