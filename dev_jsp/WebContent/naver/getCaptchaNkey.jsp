@@ -1,3 +1,4 @@
+<%@page import="sun.rmi.server.Dispatcher"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.io.*,java.net.*" %>
@@ -7,7 +8,7 @@
 	
 	try{
 	     String code = "0"; // 키 발급시 0,  캡차 이미지 비교시 1로 세팅
-	     String apiUrl = "https://openapi.naver.com/v1/captcha/nkey?code=" + code; //https: 톰캣서버에 대한 인증을 받음. 보안 ,허가
+	     String apiUrl = "https://openapi.naver.com/v1/captcha/nkey?code=" + code; /* https: 톰캣서버에 대한 인증을 받음. 보안 ,허가 */
 	     URL url = new URL(apiUrl);
 	     HttpURLConnection con = (HttpURLConnection)url.openConnection();
 	     //p82 get방식인지 post방식인 구별해주는 것은 헤더에서 결정한다. 그러니 헤더에 넣어주자.
@@ -28,10 +29,9 @@
 	     }
 	     //사용한 자원 반납하기
 	     br.close();
-	     out.println(sb_line.toString()); //키값을 잘 받아왔는지 페이지에 출력하도록 해보자.
+	     out.println(sb_line.toString()); //키값을 잘 받아왔는지 페이지에 출력하도록 해보자. {"Key":""} 이와같은 형태로 들어옴.
 	} catch(Exception e){
 		out.print(e.toString());
 	}
 	//키값을 넘겨서 이미지를 받아오자.
-	
 %>

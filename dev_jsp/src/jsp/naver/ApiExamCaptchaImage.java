@@ -36,7 +36,7 @@ public class ApiExamCaptchaImage {
 
      System.out.println(responseBody);
  }
-
+ 								//url : connect(naver was),  map: id, secreid
  private static String get(String apiUrl, Map<String, String> requestHeaders){
      HttpURLConnection con = connect(apiUrl);
      try {
@@ -57,7 +57,7 @@ public class ApiExamCaptchaImage {
          con.disconnect();
      }
  }
-
+ 				//class -> 객체화
  private static HttpURLConnection connect(String apiUrl){
      try {
          URL url = new URL(apiUrl);
@@ -92,7 +92,7 @@ public class ApiExamCaptchaImage {
      try (BufferedReader lineReader = new BufferedReader(streamReader)) {
          StringBuilder responseBody = new StringBuilder();
 
-         String line;
+         String line;//				┌>버퍼를 읽는다. 그리고 문자를 하나씩 붙혀주자.
          while ((line = lineReader.readLine()) != null) {
              responseBody.append(line);
          }

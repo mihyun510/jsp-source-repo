@@ -1,20 +1,20 @@
-<%@page import="java.util.Map"%>
-<%@page import="java.util.HashMap"%>
 <%@page import="java.io.InputStreamReader"%>
-<%@page import="java.net.URL"%>
-<%@page import="java.net.HttpURLConnection"%>
 <%@page import="java.io.BufferedReader"%>
+<%@page import="java.net.HttpURLConnection"%>
+<%@page import="java.net.URL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%
+	String user = request.getParameter("user");
+	String key = request.getParameter("key");
+
 	String clientId = "NEzgA8FpF7thgoIuuLtp"; //애플리케이션 클라이언트 아이디값
 	String clientSecret = "jpVUpv3RhC"; //애플리케이션 클라이언트 시크릿값
 
-	String key= null; 
 	try{
-		String code = "0"; //키발급시 0, 캡차이미지 비교시 1로 셋팅
-	    String apiUrl = "https://openapi.naver.com/v1/captcha/nkey?code="+code; /* 키값을 가져오는 url 참고사항을 보면됨. */
+		String code = "1"; //키발급시 0, 캡차이미지 비교시 1로 셋팅
+	    String apiUrl = "https://openapi.naver.com/v1/captcha/nkey?code="+code+"&key="+key+"&value="+user; /* 키값을 가져오는 url 참고사항을 보면됨. */
 
 	    URL url = new URL(apiUrl);
 	    HttpURLConnection con = (HttpURLConnection)url.openConnection(); //return은 객체를 선언하는 부분
@@ -40,13 +40,7 @@
 	    	 sb_line.append(line); 
 	     }
 	     br.close();
-	     key = sb_line.toString();
-	     //out.println(sb_line.toString());
-	     key = key.substring(8,24);
-	     //out.print(key);
-	     String apiURL2  = "https://openapi.naver.com/v1/captcha/ncaptcha.bin?key="+key; /*네이버가 서버로 주는 것. {"Key":"키값"} */
-	     //아래코드가 어렵다. 안해본 사람.
-	     out.print(apiURL2);
+		 out.print(sb_line.toString());
 	} catch(Exception e){
 		out.print(e.toString());
 	}
