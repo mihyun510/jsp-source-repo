@@ -35,7 +35,7 @@
 				temp = temp + 1;
 			}
 		}
-		alert("temp:"+temp);
+		//alert("temp:"+temp);
 		document.getElementById("f_test1").submit();
 		//$("#f_test1")
 	}
