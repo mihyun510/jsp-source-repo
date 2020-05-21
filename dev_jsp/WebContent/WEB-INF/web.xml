@@ -27,6 +27,15 @@
  	</error-page>
  	
  	<servlet>
+ 		<servlet-name>loginServlet</servlet-name>
+ 		<servlet-class>jsp.ch10.LoginServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>loginServlet</servlet-name>
+ 		<url-pattern>/ch10/login.do</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	<servlet>
  		<servlet-name>deptMgr</servlet-name>
  		<servlet-class>jsp.dept.DeptController</servlet-class>
  	</servlet>
@@ -127,6 +136,13 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<!-- 커넥션풀을 사용하기 위해서 서버에서 resource을 추가한 것에 대한것에 xml에 추가하는 코드 -->
+	<resource-ref>
+		<description>Connection</description>
+		<res-ref-name>jdbc/dbPool</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
 <!-- 	<servlet> 이와같이 입력수정삭제조회 이렇게 각각의 기능에 대해서 각각의 서블이 모두 존재하는 것은 매우 비효율 적이므로 한개의 서블릿에 if문으로 조건을 나누자. 
 		<servlet-name>orderDelServlet2</servlet-name>
 		<servlet-class>jsp.ch17.OrderDeleteServlet2</servlet-class> 여기서 OrderDeleteServlet2이 존재하지 않으면 ClassNotFoundException 404가 발생한다. nullpointexception이 발생하면 500번이 일어난다.
@@ -143,4 +159,8 @@
 		<servlet-name>orderUPDServlet2</servlet-name>
 		<url-pattern>/ch17/orderUpdate.do</url-pattern>
 	</servlet-mapping> -->
+	<!-- 기본 세션의 유지 시간을 30분으로 설정 그리고 이렇게 일괄 처리하는 대신 하나씩 처리할 수 있다. -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 </web-app>

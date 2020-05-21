@@ -37,6 +37,8 @@
          UserDatabaseRealm to authenticate users
     -->
     <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
+    <!-- 커넥션 풀을 사용하기 위해서 server.xml엣 리소스 추가하기 name : 서버코드에 있는 이름을 서버에서 읽어왓야된다. type : class타입-->
+    <Resource auth="Container" driverClass="oracle.jdbc.driver.OracleDriver" maxActive="50" maxWait="1000" name="jdbc/dbPool" username="scott" password="tiger" type="javax.sql.DataSource" url="jdbc:oracle:thin:@192.168.0.23:1521:orcl11"></Resource>
   </GlobalNamingResources>
 
   <!-- A "Service" is a collection of one or more "Connectors" that share
@@ -153,7 +155,11 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 		<!-- Context => 톰캣에 프로젝트를 배치하면 변경되는 코드 ,reloadable가 true이면 수정이 되면 다시 한번 로딩 해주셈. -->
-      <Context docBase="dev_jsp" path="/" reloadable="false" source="org.eclipse.jst.jee.server:dev_jsp"/><Context docBase="studyJSP" path="/studyJSP" reloadable="true" source="org.eclipse.jst.jee.server:studyJSP"/></Host>
+		<!-- 커넥션 풀방식을 사용하기 위해서 context안에 resource을 추가해준다. -->
+      <Context docBase="dev_jsp" path="/" reloadable="true" source="org.eclipse.jst.jee.server:dev_jsp">
+      	<ResourceLink global="jdbc/dbPool" name="jdbc/dbPool" type="javax.sql.DataSource"/>
+      </Context>
+      <Context docBase="studyJSP" path="/studyJSP" reloadable="true" source="org.eclipse.jst.jee.server:studyJSP"/></Host>
       <!-- 							└>getContextPath():String - 소유주  -->
     </Engine>
   </Service>
