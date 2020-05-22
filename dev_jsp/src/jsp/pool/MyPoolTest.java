@@ -12,10 +12,8 @@ public class MyPoolTest {
 		try {
 			InitialContext ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/dbPool");
-			
 			System.out.println(ds);
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 	}

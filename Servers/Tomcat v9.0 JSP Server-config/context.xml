@@ -26,5 +26,4 @@
     <!--
     <Manager pathname="" />
     -->
-    <ResourceLink global="jdbc/dbPool" name="jdbc/dbPool" type="javax.sql.DataSource"/>
 </Context>

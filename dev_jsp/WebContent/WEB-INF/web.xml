@@ -27,6 +27,15 @@
  	</error-page>
  	
  	<servlet>
+ 		<servlet-name>FrontController2</servlet-name>
+ 		<servlet-class>com.mvc2.FrontMVC2</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>FrontController2</servlet-name>
+ 		<url-pattern>*.mvc2</url-pattern>
+ 	</servlet-mapping>
+ 	
+ 	<servlet>
  		<servlet-name>loginServlet</servlet-name>
  		<servlet-class>jsp.ch10.LoginServlet</servlet-class>
  	</servlet>

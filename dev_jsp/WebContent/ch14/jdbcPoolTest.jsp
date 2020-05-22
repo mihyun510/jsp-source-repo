@@ -15,13 +15,13 @@
 <%
 	try{
 		InitialContext ctx = new InitialContext();
-		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/dbPool");
+		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/dbPool"); //주소번지를 넘겨?
 		out.println(ds);
 		String sql = "select dname from dept";
 		Connection con = ds.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rs = null;
-		//ResultSet rs = pstmt.executeQuery();
+		rs = pstmt.executeQuery();
 		while(rs.next()) {
 			out.print(rs.getString("dname"));
 		}
