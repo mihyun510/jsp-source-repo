@@ -20,12 +20,12 @@ public class MVCServlet extends HttpServlet{
 	}
 	public void doService(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		logger.info("doService 호출 성공");
-		String uri = req.getRequestURI();//member/memberList.kosmo
-		String context = req.getContextPath();//server.xml의 context path = /
+		String uri = req.getRequestURI();//member/memberList.kosmo , getRequestURI()는 contextpath부터 나옴
+		String context = req.getContextPath();//server.xml의 context path = /,  getRequestURI()에서 해당 페이지 이름의 앞부분까지의 범위 컨텍스트 패스가 프로젝트 이름을 뜻하는 건가,,? 여기서 /이것만 나오는것을 보아 맞는듯.,.
 		logger.info("uri: "+uri);
-		logger.info("context: "+context); // 0 , /dev_jsp
-		String command = uri.substring(context.length()+1); // order/goods/goodsInsert.kosmo
-		logger.info("command: "+ command); // 
+		logger.info("context: "+context); // 0 , /dev_jsp 근데 여기서는 컨텍스트 이름을 지웠으므로 0 아무것도 출력안됨. 
+		String command = uri.substring(context.length()+1); // order/goods/goodsInsert.kosmo , 여기서 /를 지우기 위해서 컨텍스트 패스 길이에서 1를 더해서 처리
+		logger.info("command: "+ command); // 그럼 여기서는 슬래쉬가 잘린 uri가 나옴.
 		int end = command.lastIndexOf('.'); //.을 기준으로 뒤에서 부터 .의 인덱스를 구함
 		logger.info("end: "+end); //end: 23
 		command = command.substring(0, end);
