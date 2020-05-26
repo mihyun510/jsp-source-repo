@@ -6,9 +6,11 @@ import org.apache.log4j.Logger;
  * FrontMVC2에서 받은 URI와 crud를 가지고 CRI의 값은 배열에 각각의 방에 담고
  * 그 방에 담은 것을 가지고 업무와 업무이름을 나누어 사용한다.
  * 그리고 crud는 해당 업무 구현체클래스의 생성자를 통해서 전달한다.
+ * 
+ * 여기서 FrontMVC2에서 가공한 URL를 가지고 업무이름에 해당하는 Controller를 여기서 인스턴스화 해준다. 그리고 생성할때 FrontMVC2에서 얻은 crud를 넘기며 생성한다.
  */
 public class controllerMapper {
-	//controller인터페이스의 구현체 클래스와 Controller와 연결하기위한 클래스이다. 그리고 그것을 이어줄 메소드 ? 모두가 사용할 것이다. static
+	//controller인터페이스의 구현체 클래스와 Controller와 연결하기위한 클래스이다. 그리고 그것을 이어줄 메소드 ? 모두가 사용할 것이다. static으로 선언했으니 클래스로 메소드 접근가능
 	public static Controller getController(String command, String crud) {//crud: 삭제, 수정, 입력, 조회를 나누자. 
 		Logger logger = Logger.getLogger(controllerMapper.class);
 		logger.info("command: "+command+", crud:"+crud);
@@ -20,7 +22,7 @@ public class controllerMapper {
 		}
 		if(commands.length==2) {
 			String work = commands[0]; //첫번째방은 업무 이름
-			String requestName = commands[1]; //두번째 방은 요청이름
+			String requestName = commands[1]; //두번째 방은 요청이름 - 필요가 없음,., 메소드이름과 똑같이 매칭이 불가능 @이 클래스에만 제공? 스프링에선 가능.,.
 			if("member".equals(work)) {
 				//생성자를 통해서 crud의 값을 넘김.
 				controller = new MemberController(crud); // 해당 업무가 member이면 그에 맞는 구현제클래스로 인스턴스화 해줌
