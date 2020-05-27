@@ -13,7 +13,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver" /> <!-- 드라이버클래스 -->
-				<property name="url" value="jdbc:oracle:thin:@192.168.0.23:1521:orcl11" /> <!-- URL -->
+				<property name="url" value="jdbc:oracle:thin:@192.168.0.24:1521:orcl11" /> <!-- URL -->
 				<property name="username" value="${username}" /> <!-- 계정 -->
 				<property name="password" value="tiger" /><!-- 비번 -->
 			</dataSource>
@@ -25,6 +25,7 @@
 		DML구문 즉, select, insert, update, delete이 작성된 xml파일의 물리적인 위치와 파일명을 등록하는 작업 - 21번, 만약 2개를 관리하고 싶다면 하나더 추가하면됨 - 22번
 	  -->
 	<!-- 				   ┌>패키지이름 		  ┌>관리할 xml파일-->
+		<mapper resource="orm/mybatis/mapper/member.xml" /> <!-- 쿼리문이 들어있음. -->
 		<mapper resource="orm/mybatis/mapper/emp.xml" /> <!-- 쿼리문이 들어있음. -->
 		<mapper resource="orm/mybatis/mapper/dept.xml" /> <!-- 쿼리문이 들어있음. -->
 		<mapper resource="orm/mybatis/mapper/book.xml" /> <!-- 쿼리문이 들어있음. -->

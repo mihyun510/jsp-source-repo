@@ -81,15 +81,18 @@ public class FrontMVC2 extends HttpServlet{
 			String pageMove[] = null; //이동해야되는 페이지의 정보르 담고 있고 이동하는 방법 결정
 			pageMove = path.split(":"); //:로 잘라서 처음에 잘린 것으로페이지 이동방식을 결정할 것이다. => memberController가 내뱃은 페이지이동방식과 이동페이지를 :로 구분해서 내뱃엇으니 :로 잘라서 배열에 담아야 된다.
 			for(int i = 0; i<pageMove.length; i++) {
-				logger.info("pageMove["+i+"]+: "+ pageMove[i]); //안에 배열의 값을 확인한다.
+				logger.info("pageMove["+i+"]: "+ pageMove[i]); //안에 배열의 값을 확인한다.
 			}
+			String path2 = pageMove[1];
 			if(pageMove != null) {
+				logger.info("pageMove != null if문 실행함."); //안에 배열의 값을 확인한다.
 				//여기서 path2는 path에서 가져온 값 중에서 이동페이지를 자른 값을 담고 있음
-				String path2 = pageMove[1];
 				//여기서는 페이지이동 방법을 구별해서 그 방법으로 해당 페이지를 이동함.
 				if("redirect".equals(pageMove[0])) {//페이지 이동 결정하는 구간.
+					logger.info("redirect실행함."); //안에 배열의 값을 확인한다.
 					resp.sendRedirect(pageMove[1]);
-				}else if("foward".equals(pageMove[0])) {
+				}else if("forward".equals(pageMove[0])) {
+					logger.info("forward실행함."); //안에 배열의 값을 확인한다.
 					RequestDispatcher view = req.getRequestDispatcher(path2);
 					view.forward(req, resp);
 				}

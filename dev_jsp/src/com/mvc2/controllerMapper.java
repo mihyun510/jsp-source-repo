@@ -24,7 +24,7 @@ public class controllerMapper {
 			String work = commands[0]; //첫번째방은 업무 이름
 			String requestName = commands[1]; //두번째 방은 요청이름 - 필요가 없음,., 메소드이름과 똑같이 매칭이 불가능 @이 클래스에만 제공? 스프링에선 가능.,.
 			if("member".equals(work)) {
-				//생성자를 통해서 crud의 값을 넘김.
+				//생성자를 통해서 crud의 값을 넘김.			┌>컨트롤러에 전달.
 				controller = new MemberController(crud); // 해당 업무가 member이면 그에 맞는 구현제클래스로 인스턴스화 해줌
 			}
 		}

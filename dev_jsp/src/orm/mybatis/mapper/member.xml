@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orm.mybatis.mapper.memberMapper"><!-- namespace:이름을 부여한다. -->
+	<select id="currentTime" parameterType="map" resultType="java.util.Map"><!-- resultType을 VO로 안하고 Map으로 해보자. -->
+		select to_char(sysdate, 'HH24:MI:SS') <!-- 쿼리문을  발췌해서 테스트를 돌리자. -->
+		 from dual
+	</select>
+	
+	<select id="login" parameterType="map" resultType="string">
+		select mem_name from member
+		 <where>
+		 	<if test='MEM_ID!=null and MEM_ID.length()>0'><!-- 여기서 조건을 줄때도 맵의 컬럼을 받아오므로 대문자로 맞춰줘야됨을 잊지마시오., -->
+		 		mem_id = #{MEM_ID}
+		 	</if>
+		 	<if test='MEM_PW!=null and MEM_PW.length()>0'>
+		 		AND mem_pw = #{MEM_PW}
+		 	</if>
+		 </where>
+	</select>
+	<select id="memberList" resultType="map"><!-- java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for memList : 매핑이 안되어있으면 나오는 오류임 -->
+		select mem_name, mem_id, mem_pw from member
+	</select>
+</mapper>
