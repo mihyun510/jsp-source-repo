@@ -42,33 +42,32 @@
             %>
             <tr>
             <%
-           		for(i=0; i<rmap.size(); i++){
            			Set set = rmap.keySet();
                     Iterator iterator = set.iterator();
                     String key = null;
                     while(iterator.hasNext()){
                         key = (String) iterator.next();
                         System.out.println("KEY : " + key); // Key2 , Key1, Key5, Key4, Key3
-                    }
-					if("MEM_ID".equals(key)){
+                    
+						if("MEM_ID".equals(key)){
 			%>
 						<td id="MEM_ID"><%=rmap.get(key) %></td>
 			<%
-					}else if("MEM_PW".equals(key)){
+						}else if("MEM_PW".equals(key)){
 			%>
 						<td id="MEM_PW"><%=rmap.get(key) %></td>
 			<%	
-					}else if("MEM_NAME".equals(key)){
+						}else if("MEM_NAME".equals(key)){
 			%>
 						<td id="MEM_NAME"><%=rmap.get(key) %></td>
 			<%
-	           			}
-	           		}
+           				}
+           			}
             %>
             </tr>
             <%
             	}
-            }else{
+           	}else{
            	%>
 	           	<tr>
 		    	<!-- colspan="2" = > 옆 칸과 합친다. -->

@@ -128,7 +128,7 @@
 		</init-param>
 		<init-param>
 			<param-name>jdbcUrl</param-name>
-			<param-value>jdbc:oracle:thin:@192.168.0.23:1521:orcl11</param-value>
+			<param-value>jdbc:oracle:thin:@192.168.0.24:1521:orcl11</param-value>
 		</init-param>
 		<init-param>
 			<param-name>username</param-name>

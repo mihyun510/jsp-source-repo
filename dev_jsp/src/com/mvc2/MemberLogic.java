@@ -22,7 +22,15 @@ public class MemberLogic {
 	public List<Map<String, Object>> memberList(Map<String, Object> pMap) {
 		logger.info("MemberLogic의 memberList호출 성공");
 		List<Map<String, Object>> memList = null;
-		memList = mDao.memberList();
+		memList = mDao.memberList(pMap);
 		return memList;
 	}
+
+	public int memberAdd(Map<String, Object> pMap) {
+		logger.info("MemberLogic의 memberAdd호출 성공");
+		int result = mDao.memberAdd(pMap);
+		return result;
+	}
+	
+	
 }

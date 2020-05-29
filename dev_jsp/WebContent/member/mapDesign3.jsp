@@ -29,8 +29,17 @@
 	//쿠키 정보를 담을 전역변수 선언하기
 		var c_name = null;
 		function memberList(){
-			alert("회원목록호출성공");
-			location.href="./login.mvc2?crud=memberList";
+			//alert("회원목록호출성공");
+			//location.href="./login.mvc2?crud=memberList"; //login.mvc2여기서는 지금 페이지 이름이 의미가 없다 왜냐하면 페이지 이름을 가지고 업무를 진행할 수 없기 때문이다. 그리고 여기서 @이 클래스 앞에만 제공하기 떄문에 메소드에서도 제공을 해주는 스프링에서는 가능하다.
+			$('#dl_memList').dialog({ //페이지 이동을 위해서 - memberList의 페이지가 여기 모달안으로 들어옴.
+			    title: '회원목록',
+			    width: 400,
+			    height: 400,
+			    closed: false,
+			    cache: false,
+			    href: 'memberList.jsp', //모달안에 jsp 페이지을 넣는 역할을 하는 아이. - href 
+			    modal: true
+			});
 		}
 		function login() {
 			<%-- var u_id = $("#tb_id").val(); //이렇게 화면에 그냥 보여주는 것은 name의 값이 아닌 id의 값을 가져와야된다. 자바로 처리할 것이 아닌 자바스크립트로 이벤트를 처리할려면 id값을 사용
@@ -78,6 +87,19 @@
 			$("#d_resList").hide(); */
 			location.href="logout.jsp";
 		} 
+		//입력버튼에서 저장버튼을 누르면 새로고침되는 함수
+		function fun(){
+			alert("mapDesign3.jsp fun호출");
+			$('#dl_memList').dialog({
+				title:'회원관리',
+			    width: 400,
+			    height: 400,
+			    closed: false,
+			    cache: false,
+			    href: './member.mvc2?crud=memberList',
+			    modal: true
+			});
+		}
 		function like(u_num){
 			$.ajax({
 				method:'post'
@@ -239,7 +261,7 @@
 			<!--#######################업무 목록 끝################################  -->
 			<!-- ======================== 식당목록 시작 ============================ -->
 			<div id="d_resList">식당목록</div>
-			<!-- ======================== 식당목록 끝 ============================ -->
+			<!-- ======================== 식당목록 끝 ============================== -->
 			<script type="text/javascript">
 				$(document).ready(function(){
 					/* $("#d_login").show(); //show():jquery가 제공하는 함수 - 보여주자
@@ -304,18 +326,6 @@
 	<!-- =============================== 메인 페이지 코드가 끝 ====================================== -->
 	<!-- =============================== 모달 창에 필요한 코드 시작 ====================================== -->
 	<div id="dl_memList">Dialog Content.</div>
-	<!-- =============================== 모달 창에 필요한 코드 끝 ====================================== -->
-	<script type="text/javascript">
-	//spring의 연장선.,.
-		$('#dl_memList').dialog({
-		    title: '회원목록',
-		    width: 400,
-		    height: 200,
-		    closed: true,
-		    cache: false,
-		    href: 'memberList.jsp',
-		    modal: true
-		});
-	</script>	
+	<!-- =============================== 모달 창에 필요한 코드 끝 ====================================== -->	
 </body>
 </html>

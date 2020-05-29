@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
@@ -8,7 +9,8 @@
 <%
 	List<Map<String, Object>> memberList = new ArrayList<>();
 	MemberDao mDao = new MemberDao();
-	memberList = mDao.memberList();
+	Map<String, Object> pMap = new HashMap<>();
+	memberList = mDao.memberList(pMap);
 	Gson g = new Gson();
 	String memList = g.toJson(memberList);
 	out.print(memList);

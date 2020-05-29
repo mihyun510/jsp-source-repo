@@ -6,4 +6,5 @@
 <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css"> <!-- 데모버전 사용 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script> <!-- jquery사용 api에서 제공하는 안정화된 버전 사용-->
 <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script> <!-- eaayui사용 -->
-<%-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/jax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>jquery 쿠기 사용 --%>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/jax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script><%-- query 쿠기 사용 --%>
+<script type="text/javascript" src="../js/commons.js"></script>

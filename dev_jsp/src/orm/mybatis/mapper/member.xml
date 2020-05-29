@@ -6,6 +6,10 @@
 		 from dual
 	</select>
 	
+	<select id="memberListEX" resultType="map"><!-- java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for memList : 매핑이 안되어있으면 나오는 오류임 -->
+		select mem_name, mem_id, mem_pw from member
+	</select>
+	
 	<select id="login" parameterType="map" resultType="string">
 		select mem_name from member
 		 <where>
@@ -17,7 +21,18 @@
 		 	</if>
 		 </where>
 	</select>
-	<select id="memberList" resultType="map"><!-- java.lang.IllegalArgumentException: Mapped Statements collection does not contain value for memList : 매핑이 안되어있으면 나오는 오류임 -->
-		select mem_name, mem_id, mem_pw from member
+	
+	<select id="memberList" parameterType="map" resultType="map">
+		select mem_id, mem_pw, mem_name from member
+		 <where>
+		 	<if test='MEM_ID!=null and MEM_ID.length()>0'>
+		 		mem_id = #{MEM_ID}
+		 	</if>
+		 </where>
 	</select>
+	
+	<insert id="memberAdd" parameterType="map">
+		INSERT INTO MEMBER (MEM_ID,MEM_PW,MEM_NAME) 
+		  VALUES(#{MEM_ID},#{MEM_PW},#{MEM_NAME})
+	</insert>
 </mapper>
