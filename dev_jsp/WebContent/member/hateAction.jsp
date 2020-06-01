@@ -27,7 +27,6 @@
 		e.printStackTrace();
 	} finally{
 		dbMgr.freeConnection(con, pstmt);
-		
 	}
 	out.print(result);
 %>

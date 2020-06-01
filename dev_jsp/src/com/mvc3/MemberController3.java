@@ -1,5 +1,6 @@
-package com.mvc2;
+package com.mvc3;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,21 +23,32 @@ import com.mvc3.ModelAndView;
  * 이 메소드 안에서 CRUD을 나눠서 업무 로직을 진행함 - if문 사용
  * if문 조건 비교를 위해서 crud의 값을 사용할 것이다.
  */
-public class MemberController implements Controller{
-	Logger logger = Logger.getLogger(MemberController.class);
+public class MemberController3 implements Controller2020{
+	Logger logger = Logger.getLogger(MemberController3.class);
 	String crud = null;
-	MemberLogic memLogic = null;
-	public MemberController(String crud) {
+	MemberLogic3 memLogic = null;
+	public MemberController3(String crud) {
 		this.crud = crud;
-		memLogic = new MemberLogic();
+		memLogic = new MemberLogic3();
 	}
 
 	
 	//리턴 타입이 오브젝트인 것을 다시 설계해보자.
-	/*
-	 * @Override public ModelAndView process(String work, HttpServletRequest
-	 * req,HttpServletResponse resp) { return new ModelAndView(); }
-	 */
+	@Override 
+	public ModelAndView process(String requestName, HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{ 
+		logger.info("process 호출 성공");
+		//ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView(req,resp);
+		//업무이름과 응답할 페이지
+		//mav.setViewName(work+"/memberList3.jsp");//응답페이지의 이름을 정한다.
+		mav.setViewName(requestName);
+		if("member/memberList".equals(requestName)) {
+			resp.sendRedirect(req.getContextPath()+"/"+requestName+".jsp");
+		}else if("zipCodeLsit".equals(requestName)) {
+			
+		}
+		return mav;
+	}
 	 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws ServletException {

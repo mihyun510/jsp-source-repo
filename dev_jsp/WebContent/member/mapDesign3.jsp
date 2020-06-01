@@ -31,7 +31,7 @@
 		function memberList(){
 			//alert("회원목록호출성공");
 			//location.href="./login.mvc2?crud=memberList"; //login.mvc2여기서는 지금 페이지 이름이 의미가 없다 왜냐하면 페이지 이름을 가지고 업무를 진행할 수 없기 때문이다. 그리고 여기서 @이 클래스 앞에만 제공하기 떄문에 메소드에서도 제공을 해주는 스프링에서는 가능하다.
-			$('#dl_memList').dialog({ //페이지 이동을 위해서 - memberList의 페이지가 여기 모달안으로 들어옴.
+			$('#dl_memList').dialog({ //페이지 이동을 위해서 - mem berList의 페이지가 여기 모달안으로 들어옴.
 			    title: '회원목록',
 			    width: 400,
 			    height: 400,
@@ -96,7 +96,7 @@
 			    height: 400,
 			    closed: false,
 			    cache: false,
-			    href: './member.mvc2?crud=memberList',
+			    href: './member.mvc3?crud=memberList',
 			    modal: true
 			});
 		}
