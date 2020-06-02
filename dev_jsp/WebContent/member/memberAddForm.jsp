@@ -9,12 +9,11 @@
 	<script type="text/javascript">
 		function memAdd(){
 			//alert("memAdd호출 성공");
-			//$(opener.location).attr("href","javascript:fun()");
 			//opener.location.href="javascript:fun()";
 			$("#f_ins").attr("method", "get");
 			$("#f_ins").attr("action", "./member.mvc2");
 			$("#f_ins").submit();
-			
+			$(opener.location).attr("href","javascript:fun()");
 			self.close();
 		}
 	</script>

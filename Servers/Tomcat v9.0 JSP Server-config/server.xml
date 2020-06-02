@@ -156,7 +156,7 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 		<!-- Context => 톰캣에 프로젝트를 배치하면 변경되는 코드 ,reloadable가 true이면 수정이 되면 다시 한번 로딩 해주셈. -->
 		<!-- 커넥션 풀방식을 사용하기 위해서 context안에 resource을 추가해준다. -->
-      <Context docBase="dev_jsp" path="/dev_jsp" reloadable="true" source="org.eclipse.jst.jee.server:dev_jsp">
+      <Context docBase="dev_jsp" path="/" reloadable="false" source="org.eclipse.jst.jee.server:dev_jsp">
       	<ResourceLink global="jdbc/dbPool" name="jdbc/dbPool" type="javax.sql.DataSource"/>
       </Context>
       <Context docBase="studyJSP" path="/studyJSP" reloadable="true" source="org.eclipse.jst.jee.server:studyJSP"/></Host>

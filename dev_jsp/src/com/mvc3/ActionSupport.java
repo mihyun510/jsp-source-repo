@@ -53,11 +53,13 @@ public class ActionSupport extends HttpServlet{
 //		crud= req.getParameter("crud");
 //		logger.info("crud===>"+crud); //입력받은 crud의 값이 담김. 
 		//insert here - 인스턴스화 and process call
+		String cud = req.getParameter("cud");
+		logger.info("cud: "+cud);
 		try {//여기서 들어온 uri를 가공하여 업무/업무이름과 같이 넘어온 데이터 값 받아서 넘겨주기, uri에서 컨텍스트 패스를 제외한 값을 넘기는 것이고, requestURI에는 쿼리스트링 값이 담기지 않으니 따로 getparameter을 통해서 crud의 입력값을 받아서 그 값을 구현체클래스와 이어주는 mapper클래스로 넘김.
 			//어떤 컨트롤러를 탈지는 폴더이름으로 결정한다. 그리고 업무이름은 요청이 들어온 페이지 이름으로 결정한다.
 //			controller = controllerMapper3.getController(command, crud); //인터페이스하고 여러가지의 구현체클래스를 이어주는 맵퍼클래스를 생성하여 사용. 인터페이스로 선언하고 해당 경우에 따라서 적절한 구현체 클래스로 인스턴스화함.
 														//┌>여기서 command를 넘기는게 맞아? 내 생각엔 requestName을 넘기는 게 아니라 .jsp를 자른 requestName을 넘겨야 된다고 생각한다.
-			controller = controllerMapper3.getController(command); //인터페이스하고 여러가지의 구현체클래스를 이어주는 맵퍼클래스를 생성하여 사용. 인터페이스로 선언하고 해당 경우에 따라서 적절한 구현체 클래스로 인스턴스화함.
+			controller = controllerMapper3.getController(requestName); //인터페이스하고 여러가지의 구현체클래스를 이어주는 맵퍼클래스를 생성하여 사용. 인터페이스로 선언하고 해당 경우에 따라서 적절한 구현체 클래스로 인스턴스화함.
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,12 +67,50 @@ public class ActionSupport extends HttpServlet{
 		//값을 꺼내는 시점에서 Null인지을 확인하기
 		if(controller!=null) {
 			String pageMove[] = null;
+			//여기서 process는 ModelAndView 여기로 가는 것임
 			try {
-				//여기서 process는 ModelAndView 여기로 가는 것임
-				Object robj = controller.process(requestName, req, resp);
+				//Object에 오는 타입이 2가지 이다.
+				//하나는 ModelAndView 나머지 하나는 String
+				Object robj = null;
+				if(cud==null) {
+					logger.info("cud가 null이 일때로 처리 ModelAndView");
+					robj = controller.process(requestName, req, resp);//object ModelAndView
+				} else {//입력이야? 수정할거야? 삭제할거야?
+					logger.info("cud가 null이 아닐때로 처리 String");
+					robj = controller.process(req, resp);//string
+				}
+				//ModelAndView인지 아닌지 String인지 찍어보자.
+				logger.info("robj: "+robj);
+				if(robj instanceof String) {
+					pageMove = robj.toString().split(":");
+					logger.info("pageMove[0]:"+pageMove[0]+", paveMove[1]:"+pageMove[1]);
+				}
+				else if(robj instanceof ModelAndView) {
+					ModelAndView mav = (ModelAndView) robj;
+					pageMove = new String[2];
+					//여기에 WEB-INF로 이동할 페이지가 담길 배열
+					pageMove[0] = "forward";
+					pageMove[1] = mav.getViewName(); //페이지 이름을 가져온다.
+				}
 			} catch(Exception e) {
+				logger.info("Exception: "+e.toString());
 				e.printStackTrace();
 			}
-		}
-	}
+			//insert here - redirect인 경우와 forward인 경우를 쪼개기
+			//힌트: return "redirect:/member/memberList.mvc3
+			if(pageMove != null) {
+				String path = pageMove[1];
+				if("redirect".equals(pageMove[0])) {//너 redirect로 할거야?
+					resp.sendRedirect(path);
+				} else {//너 forward로 할려고 그래?
+					if("forward".equals(pageMove[0])) {
+						RequestDispatcher view = req.getRequestDispatcher(path);
+						view.forward(req, resp);
+					} else {
+						resp.sendRedirect("/error/pageMoveFail.jsp"); //에러페이지 따로 보여준다. 500번 에러에 대비
+					}
+				}
+			}
+		}//////////////////////////////////////////end of Controller가 null이 아닐때////
+	}//////////////////////////////////////////////end of doService//////////////////
 }

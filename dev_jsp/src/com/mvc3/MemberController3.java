@@ -25,7 +25,8 @@ import com.mvc3.ModelAndView;
  */
 public class MemberController3 implements Controller2020{
 	Logger logger = Logger.getLogger(MemberController3.class);
-	String crud = null;
+	String crud = null; //requestName : 업무이름 확장자잘림
+	
 	MemberLogic3 memLogic = null;
 	public MemberController3(String crud) {
 		this.crud = crud;
@@ -36,16 +37,18 @@ public class MemberController3 implements Controller2020{
 	//리턴 타입이 오브젝트인 것을 다시 설계해보자.
 	@Override 
 	public ModelAndView process(String requestName, HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{ 
-		logger.info("process 호출 성공");
+		logger.info("process[ModelAndView] 호출 성공, requestName:"+requestName);
 		//ModelAndView mav = new ModelAndView();
 		ModelAndView mav = new ModelAndView(req,resp);
 		//업무이름과 응답할 페이지
 		//mav.setViewName(work+"/memberList3.jsp");//응답페이지의 이름을 정한다.
 		mav.setViewName(requestName);
 		if("member/memberList".equals(requestName)) {
-			resp.sendRedirect(req.getContextPath()+"/"+requestName+".jsp");
+			//resp.sendRedirect(req.getContextPath()+"/"+requestName+".jsp");
+			mav.setViewName("/member/memberList3.jsp");
+			//return null;
 		}else if("zipCodeLsit".equals(requestName)) {
-			
+			//return null;
 		}
 		return mav;
 	}

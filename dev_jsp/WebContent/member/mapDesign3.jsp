@@ -90,15 +90,17 @@
 		//입력버튼에서 저장버튼을 누르면 새로고침되는 함수
 		function fun(){
 			alert("mapDesign3.jsp fun호출");
-			$('#dl_memList').dialog({
+ 			$('#dl_memList').dialog({
 				title:'회원관리',
 			    width: 400,
 			    height: 400,
 			    closed: false,
 			    cache: false,
-			    href: './member.mvc3?crud=memberList',
+			    href: './member.mvc2?crud=memberList',
 			    modal: true
-			});
+			});  
+			//$("#dl_memlist").dialog('refresh','./member.mvc2?crud=memberList');
+			
 		}
 		function like(u_num){
 			$.ajax({

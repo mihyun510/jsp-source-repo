@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원목록 - mvc3단계</title>
+<title>회원목록(memberList3.jsp) - mvc3단계</title>
 <%@include file="../common/jEasyUICommon.jsp" %>
 </head>
 <body>
