@@ -29,6 +29,12 @@ public class controllerMapper3 {
 				//생성자를 통해서 crud의 값을 넘김.			┌>컨트롤러에 전달.
 				controller = new MemberController3(requestName); // 해당 업무가 member이면 그에 맞는 구현제클래스로 인스턴스화 해줌
 			}
+			//계층형 게시판 컨트롤러 생성하기
+			else if("board".equals(work)) {
+				logger.info("board: "+work);
+				controller = new BoardController(requestName);
+				
+			}
 		}
 		return controller;
 	}//end of Controller

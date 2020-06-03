@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orm.mybatis.mapper.boardMapper">
+
+	<select id="boardList" parameterType="map" resultType="map">
+		SELECT  
+			*
+		 FROM board_master_t bm, board_sub_t bs
+		 WHERE bm.bm_no = bs.bm_no(+)<!-- 첨부파일은 없을 수 있음 그러니 이쪽에 +가 붙는다. -->
+	</select>
+	
+	<insert id="boardMINS" parameterType="map">
+		INSERT INTO board_master_t(bm_no) VALUES(#{bm_no})	
+	</insert>
+	<!-- 밑에 두개를 묶어서 프로시저로 만들자  -->
+	<insert id="boardSINS" parameterType="map">
+		INSERT INTO board_sub_t(bm_no) VALUES(#{bm_no})	
+	</insert>
+	<!-- 내 뒤에 댓글이 있다면 update 진행 -->
+	<update id="bmStepUpdate" parameterType="map">
+		UPDATE board_master_t
+			SET bm_step = b_step+1
+		 WHERE bm_group = #{bm_group}
+		 	AND bm_step > #{bm_step}
+	</update>
+	<!-- 글목록에서 제목을 클릭했을때 조회수 1씩 증가시키는 sql문  -->
+	<update id="hitCount" parameterType="int">
+		UPDATE board_master_t
+			SET bm_hit = b_hit+1
+		 WHERE bm_no = #{value}
+	</update>
+	<!-- 그룹번호 채번하기  -->
+	<select id="getBmGroup" parameterType="map" resultType="int">
+		SELECT 1 FROM dual
+	</select>	
+	<!-- 글번호    채번하기  -->
+	<select id="getBmNo" parameterType="int" resultType="int">
+		SELECT 1 FROM dual
+	</select>
+</mapper>
