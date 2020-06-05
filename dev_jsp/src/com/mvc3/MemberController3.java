@@ -45,7 +45,7 @@ public class MemberController3 implements Controller2020{
 		mav.setViewName(requestName);
 		if("member/memberList".equals(requestName)) {
 			//resp.sendRedirect(req.getContextPath()+"/"+requestName+".jsp");
-			mav.setViewName("/member/memberList3.jsp");
+			mav.setViewName("/member/memberList3");
 			//return null;
 		}else if("zipCodeLsit".equals(requestName)) {
 			//return null;

@@ -17,6 +17,7 @@ public class MemberDao {
 	String resource = "orm/mybatis/Configuration.xml";
 	SqlSessionFactory sqlMapper = null;
 	public MemberDao() {
+		//마이바티스와 연동을 위해서 sqlSessionFactory를 거쳐서 sqlSession를 거쳐야 마이바티스가 연동이 된다.
 		sqlMapper = new MyBatisCommonFactory().getSqlSessionFactory(); //마이바티스 공통코드 사용
 	}
 	public String login(Map<String, Object> pMap) {

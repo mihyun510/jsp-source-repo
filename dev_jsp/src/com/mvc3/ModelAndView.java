@@ -35,7 +35,7 @@ public class ModelAndView {
 	public void setViewName(String viewName) {
 		this.viewName = viewName; //web-inf 밑에 존재하는 jsp 파일명 확장자는 들어있으면 안됨. forward forward는 피해갈 수 있다.
 		//값을 정하는 아이..
-		//this.viewName = req.getContextPath()+"/WEB-INF/view/"+viewName+".jsp";
+		this.viewName = req.getContextPath()+"/WEB-INF/view/"+viewName+".jsp";
 	}
 	public String getViewName() {
 		return viewName;

@@ -17,6 +17,7 @@
 		INSERT INTO board_sub_t(bm_no) VALUES(#{bm_no})	
 	</insert>
 	<!-- 내 뒤에 댓글이 있다면 update 진행 -->
+	<!-- 개발자에게만 필요한 정보들. 히든으로 처리하기 -->
 	<update id="bmStepUpdate" parameterType="map">
 		UPDATE board_master_t
 			SET bm_step = b_step+1

@@ -27,6 +27,7 @@ public class BoardController implements Controller2020 {
 	 ********************************************************************************************/
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		//String에서는 forward랑 redirect가 가능하다.
 		logger.info("process:String 호출 성공");
 		String path = null;
 		//너 조회버튼 누른 거야?
@@ -34,7 +35,8 @@ public class BoardController implements Controller2020 {
 			List<Map<String, Object>> mList = null;
 			Map<String, Object> pMap = new HashMap<String, Object>();
 			mList = bLogic.boardList(pMap);
-			path = "forward:memberList.jsp";
+			req.setAttribute("boardList", mList);
+			path = "forward:list.jsp";
 		}
 		//너 입력하려구
 		else if("boardINS".equals(requestName)) {

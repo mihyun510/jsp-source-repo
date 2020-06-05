@@ -159,7 +159,8 @@
       <Context docBase="dev_jsp" path="/" reloadable="false" source="org.eclipse.jst.jee.server:dev_jsp">
       	<ResourceLink global="jdbc/dbPool" name="jdbc/dbPool" type="javax.sql.DataSource"/>
       </Context>
-      <Context docBase="studyJSP" path="/studyJSP" reloadable="true" source="org.eclipse.jst.jee.server:studyJSP"/></Host>
+      <Context docBase="studyJSP" path="/studyJSP" reloadable="true" source="org.eclipse.jst.jee.server:studyJSP"/>
+      <Context docBase="mvc_board" path="/mvc_board" reloadable="true" source="org.eclipse.jst.jee.server:mvc_board"/></Host>
       <!-- 							└>getContextPath():String - 소유주  -->
     </Engine>
   </Service>
