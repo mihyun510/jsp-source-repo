@@ -7,8 +7,6 @@
     	//다운로드 되는 것임
     	//이미 모든 값이 결정된 상태임 - 변경불가함 - 정적임
     	List<Map<String,Object>> boardList = (List<Map<String,Object>>)request.getAttribute("boardList");
-    	
-    
     %>
 <!DOCTYPE html>
 <html>
@@ -16,10 +14,12 @@
 <meta charset="UTF-8">
 <title>상세보기</title>
 	<script type="text/javascript">
-		function boardList(){
+		function boardList(){//조회버튼
 			alert("글조회버튼 호출성공");
 			location.href="/board/boardList.mvc3?cud=SEL"; //string으로 타야지 여기 jsp로 올것이다.
-			
+			/* $.ajax({
+				url:"/board/boardList.mvc3?cud=SEL"
+			}) 아작스로 이동하기 json 사용*/
 		}
 		function writeForm(){
 			alert("글쓰기 버튼 호출성공");
@@ -29,9 +29,15 @@
 			    height: 400,
 			    closed: false,
 			    cache: false,
-			    href: 'writeForm.jsp',
+			    href: 'writeForm.jsp',//div로 안하고 부모창안으로 불러온것은 jsp파일을 불러와서 합쳐진것임으로 결국 jsp파일을 가져온것임
 			    modal: true
 			});
+		}
+		function board_ins(){
+			alert("저장호출 성공");
+			$("#f_write").attr("method","get");
+			$("#f_write").attr("action","./boardINS.mvc3");
+			$("#f_write").submit();
 		}
 	</script>
 <!-- 공통코드 영역(화면공통코드, 인증처리 -->

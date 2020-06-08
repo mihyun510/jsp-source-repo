@@ -42,6 +42,9 @@ public class BoardController implements Controller2020 {
 		else if("boardINS".equals(requestName)) {
 			int result = 0;
 			Map<String, Object> pMap = new HashMap<String, Object>();
+			pMap.put("bm_title", req.getParameter("bm_title"));
+			pMap.put("bm_email", req.getParameter("bm_email"));
+			pMap.put("bm_content", req.getParameter("bm_content"));
 			result = bLogic.boardINS(pMap);
 			if(result==1) path = "redirect:boardInsOk.jsp";
 			else if (result==0) path = "redirect:boardInsFail.jsp";

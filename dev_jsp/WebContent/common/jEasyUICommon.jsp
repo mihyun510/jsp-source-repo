@@ -1,6 +1,6 @@
 <%
 	StringBuilder path = new StringBuilder(request.getContextPath());
-	path.append("/");
+	path.append("/");/* 이것은 내가 만든것이다 그러니 경로가 다를 것이다. */
 %>
 <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css"><!-- css사용 -->
 <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css"><!-- 아이콘 사용 -->

@@ -1,0 +1,25 @@
+나는 화면 없이는 단위테스트를 못한다. | 그래도 나는 한다.
+board.xml의 boardMINS의 대한 단위테스트 진행하기
+어떻게 할 수 있어? get방식으로 하면된다.
+유알엘 관찰하기
+url:/board/boardList.mvc3?cud=SEL&bm_no="+bm_no+"&bm_title+"&bm_email="+email+"&bm_group="+group
+
+PL:단위테스트 URL
+
+주문관리
+주문등록 URL : 
+url:/board/boardList.mvc3?cud=SEL&bm_no="+bm_no+"&bm_title+"&bm_email="+email+"&bm_group="+group
+주문수정 URL : 
+url:/board/boardList.mvc3?cud=UPD&bm_no="+bm_no+"&bm_title+"&bm_email="+email+"&bm_group="+group
+주문삭제 URL : 
+url:/board/boardList.mvc3?cud=DEL&bm_no="+bm_no
+cud는 의미없음 그러나 DEL일때 삭제하기로 해요
+
+http://localhost:5000/
+board/boardList.mvc3?cud=INS
+					&bm_no=5
+					&bm_title=51
+					&bm_email=52
+					&bm_group=3
+
+

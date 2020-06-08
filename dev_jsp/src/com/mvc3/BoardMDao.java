@@ -25,11 +25,31 @@ public class BoardMDao {
 		logger.info("bList: "+bList.size());//null이면 nullpointException이 뜰것이다.
 		return null;
 	}
+	//글번호 채번하기
+	public int getBmNo(Map<String, Object> pMap) {
+		//insert here
+		logger.info("getBmGroup호출성공");
+		int bm_no = 0;
+		bm_no = sqlSec.selectOne("getBmNo",pMap);
+		logger.info("bm_no: "+bm_no);
+		return bm_no;
+	}
+	//그룹번호 채번하기
+	public int getBmGroup(Map<String, Object> pMap) {
+		//insert here
+		logger.info("getBmGroup호출성공");
+		int bm_group = 0;
+		bm_group = sqlSec.selectOne("getBmGroup",pMap);
+		logger.info("bm_group: "+bm_group);
+		return bm_group;
+	}
 
 	public int boardMINS(Map<String, Object> pMap) {
 		//insert here
 		logger.info("boardMINS호출성공");
-		return 0;
+		int result = 0;
+		result = sqlSec.insert("boardMINS",pMap);
+		return result;
 	}
 
 	public int boardUPD(Map<String, Object> pMap) {

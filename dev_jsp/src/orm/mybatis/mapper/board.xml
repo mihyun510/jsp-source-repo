@@ -10,7 +10,9 @@
 	</select>
 	
 	<insert id="boardMINS" parameterType="map">
-		INSERT INTO board_master_t(bm_no) VALUES(#{bm_no})	
+		INSERT INTO board_master_t(bm_no, bm_title, bm_email, bm_group) 
+						VALUES(#{bm_no}, #{bm_group}, #{bm_title}, #{bm_email})	
+						
 	</insert>
 	<!-- 밑에 두개를 묶어서 프로시저로 만들자  -->
 	<insert id="boardSINS" parameterType="map">
@@ -32,10 +34,20 @@
 	</update>
 	<!-- 그룹번호 채번하기  -->
 	<select id="getBmGroup" parameterType="map" resultType="int">
-		SELECT 1 FROM dual
+		select NVL((
+            		select /*+index_desc(board_master_t ibm_group)*/ bm_group
+            		 from board_master_t
+           			 where rownum = 1 and bm_group>0 
+          			 ), 0)+1 bm_group
+   			from dual
 	</select>	
 	<!-- 글번호    채번하기  -->
 	<select id="getBmNo" parameterType="int" resultType="int">
-		SELECT 1 FROM dual
+		select NVL((
+            		select /*+index_desc(board_master_t BM_NO_PK)*/ bm_no 
+             			from board_master_t
+            		where rownum = 1  
+           			), 0)+1 bm_no 
+  			 from dual
 	</select>
 </mapper>
