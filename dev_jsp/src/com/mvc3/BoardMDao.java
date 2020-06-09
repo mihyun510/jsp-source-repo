@@ -1,5 +1,6 @@
 package com.mvc3;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 
 import com.mvc2.MyBatisCommonFactory;
+import com.vo.BoardVO;
 
 public class BoardMDao {
 	Logger logger = Logger.getLogger(BoardLogic.class);
@@ -19,11 +21,27 @@ public class BoardMDao {
 	}
 	public List<Map<String, Object>> boardList(Map<String, Object> pMap) {
 		//insert here
-		logger.info("boardList호출성공");
+		logger.info("boardList호출성공"+pMap.get("bm_no"));
 		List<Map<String, Object>> bList = null;
 		bList = sqlSec.selectList("boardList",pMap);
 		logger.info("bList: "+bList.size());//null이면 nullpointException이 뜰것이다.
-		return null;
+		return bList;
+	}
+	//프로시저로 처리하기
+	public List<Map<String, Object>> proc_boardList(Map<String, Object> pMap) {
+		//insert here
+		logger.info("proc_boardList호출성공");
+		List<Map<String, Object>> bList = null;
+		BoardVO bVO = new BoardVO();
+		sqlSec.selectOne("proc_boardList",pMap);
+		bList = (List<Map<String, Object>>)pMap.get("key"); //프로시저는 리턴타입이 파라메터에 그대로 담아서 가져온다.
+		logger.info("bList: "+bList.size());//null이면 nullpointException이 뜰것이다.
+//		Iterator iter = bList.iterator();
+//		while(iter.hasNext()) {
+//			BoardVO bVO2 = (BoardVO)iter.next();
+//			logger.info("저자: "+bVO.getBm_writer());
+//		}
+		return bList;
 	}
 	//글번호 채번하기
 	public int getBmNo(Map<String, Object> pMap) {
@@ -49,6 +67,8 @@ public class BoardMDao {
 		logger.info("boardMINS호출성공");
 		int result = 0;
 		result = sqlSec.insert("boardMINS",pMap);
+		logger.info("result: "+result);
+		sqlSec.commit(true);
 		return result;
 	}
 

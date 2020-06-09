@@ -65,8 +65,10 @@
         			Map<String,Object> rmap = boardList.get(i);
         %>
         		<tr>
-        			<td><%= rmap.get("BM_NO") %></td>
-        			<td><%= rmap.get("BM_TITLE") %></td>
+        			<td><%=rmap.get("BM_NO")%></td>
+        			<td>
+        			<a href="./boardDetail.mvc3?cud=DEL&bm_no=<%=rmap.get("BM_NO")%>">
+        			<%= rmap.get("BM_TITLE") %></a></td>
         			<td><%= rmap.get("BM_WRITER") %></td>
         			<td><%= rmap.get("BS_FILE") %></td>
         			<td><%= rmap.get("BM_HIT") %></td>

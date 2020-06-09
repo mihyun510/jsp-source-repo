@@ -2,17 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orm.mybatis.mapper.boardMapper">
 
+	<resultMap type="map" id="bmap">
+	</resultMap>
+	
+	<select id="proc_boardList" parameterType="map" statementType="CALLABLE">
+		{ call proc_boardList(#{key, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=bmap}) }
+	</select>
+	<!-- 테이블이 2개인 경우는 앞에 별명을 붙혀주어야 됩니다. 안그러면 헷갈려 해요. -->
 	<select id="boardList" parameterType="map" resultType="map">
 		SELECT  
-			*
+			bm.bm_no, bm.bm_title, bm.bm_content, bm.bm_email, bm.bm_pw
+			,bm.bm_group, bm.bm_pos, bm.bm_step, bm.bm_writer, bm.bm_hit
 		 FROM board_master_t bm, board_sub_t bs
 		 WHERE bm.bm_no = bs.bm_no(+)<!-- 첨부파일은 없을 수 있음 그러니 이쪽에 +가 붙는다. -->
+		 	<if test="bm_no != null">
+		 		AND bm.bm_no like = #{bm_no}
+		 	</if>
 	</select>
 	
 	<insert id="boardMINS" parameterType="map">
-		INSERT INTO board_master_t(bm_no, bm_title, bm_email, bm_group) 
-						VALUES(#{bm_no}, #{bm_group}, #{bm_title}, #{bm_email})	
-						
+		INSERT INTO board_master_t(bm_no, bm_title, bm_email, bm_hit, bm_group, bm_writer, bm_content, bm_date, bm_pw, bm_pos, bm_step) 
+						VALUES(#{bm_no}, #{bm_title}, #{bm_email}, 0, #{bm_group}, #{bm_writer}, #{bm_content},
+						TO_CHAR(sysdate, 'YYYY-MM-DD'), #{bm_pw} 
+						, #{bm_pos}, #{bm_step})	
 	</insert>
 	<!-- 밑에 두개를 묶어서 프로시저로 만들자  -->
 	<insert id="boardSINS" parameterType="map">

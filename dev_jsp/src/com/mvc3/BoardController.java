@@ -34,17 +34,30 @@ public class BoardController implements Controller2020 {
 		if("boardList".equals(requestName)) {
 			List<Map<String, Object>> mList = null;
 			Map<String, Object> pMap = new HashMap<String, Object>();
+			//mList = bLogic.proc_boardList(pMap);
 			mList = bLogic.boardList(pMap);
 			req.setAttribute("boardList", mList);
-			path = "forward:list.jsp";
+			path = "forward:list.jsp";//pagemove[]
+		}
+		//너 제목을 클릭했을때?
+		else if("boardDetail".equals(requestName)) {
+			List<Map<String, Object>> mList = null;
+			Map<String, Object> pMap = new HashMap<String, Object>();
+			pMap.put("bm_no", req.getParameter("bm_no"));
+//			mList = bLogic.proc_boardList(pMap);
+			mList = bLogic.boardList(pMap);
+			req.setAttribute("boardDetatil", mList);
+			return path = "forward:read.jsp";//pagemove[]
 		}
 		//너 입력하려구
 		else if("boardINS".equals(requestName)) {
 			int result = 0;
 			Map<String, Object> pMap = new HashMap<String, Object>();
 			pMap.put("bm_title", req.getParameter("bm_title"));
+			pMap.put("bm_writer", req.getParameter("bm_writer"));
 			pMap.put("bm_email", req.getParameter("bm_email"));
 			pMap.put("bm_content", req.getParameter("bm_content"));
+			pMap.put("bm_pw", req.getParameter("bm_pw"));
 			result = bLogic.boardINS(pMap);
 			if(result==1) path = "redirect:boardInsOk.jsp";
 			else if (result==0) path = "redirect:boardInsFail.jsp";

@@ -1,5 +1,6 @@
 package com.mvc3;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +19,15 @@ public class BoardLogic {
 	}
 	public List<Map<String, Object>> boardList(Map<String, Object> pMap) {
 		logger.info("boardList호출");
-		List<Map<String, Object>> bList = null;
+		List<Map<String, Object>> bList = new ArrayList<Map<String,Object>>();
 		bList = bmDao.boardList(pMap);
+		return bList;
+	}
+	public List<Map<String, Object>> proc_boardList(Map<String, Object> pMap) {
+		logger.info("proc_boardList호출");
+		List<Map<String, Object>> bList = null;
+		bList = bmDao.proc_boardList(pMap);
+		logger.info("bList==>"+bList.size());
 		return bList;
 	}
 	
@@ -35,7 +43,7 @@ public class BoardLogic {
 		int bm_group = 0;
 		int bm_no = 0;
 		bm_no = bmDao.getBmNo(pMap); //새로운 그룹번호를 생성해서 가져옴.
-		pMap.put("bm_no", bm_no);//새로운 글 번호 넣어주기
+		//pMap.put("bm_no", bm_no);//새로운 글 번호 넣어주기
 		//그룹번호가 있나요?
 		//어디서 오셨죠? list.jsp이면 없다(새글), read.jsp 이면 있다.(댓글)
 		bm_group = bmDao.getBmGroup(pMap); //새로운 그룹번호를 생성해서 가져옴.
@@ -43,8 +51,10 @@ public class BoardLogic {
 		try {
 			//새글인가?
 			//키가 없으면 새글
+			//위에서 이미 bm_no을 넣었기 때문에 절대 이 if문 안으로 들어가지 않음 새글이든 댓글이든 무조건 새로 번호를 채번해야됨. 그래서 만약 if문안에 넣으면 else에서는 또 글번호가 채번되지 않음. 글번호는 새글이든 댓글이든 채번이 되어야된다.
 			if(!pMap.containsKey("bm_no")) {//containsKey: 키가 존재하는 체크
 				//새글이면 그룹번호를 새로 채번해야 됩니다.
+				pMap.put("bm_no",bm_no);
 				pMap.put("bm_group", bm_group);//새로운 그룹번호를 넣어줌. 새글 쓰기 인경우이니 여기 올바른 위치
 				pMap.put("bm_pos", 0);
 				pMap.put("bm_step", 0);
@@ -70,11 +80,14 @@ public class BoardLogic {
 			//크루는 PL로 부터 소스를 받으면 제일 먼저 단위테스트를 수행
 			//주의사항:테이블 컬럼을 사용자로 부터 입력받는 값과 개발자끼리만 공유하는 값
 			logger.info("bm_no ==> "+pMap.get("bm_no"));
+			logger.info("bm_group ==> "+pMap.get("bm_group"));
 			logger.info("bm_title ==> "+pMap.get("bm_title"));
 			logger.info("bm_content ==> "+pMap.get("bm_content"));
 			logger.info("bm_email ==> "+pMap.get("bm_email"));
 			logger.info("bm_pw ==> "+pMap.get("bm_pw"));
+			logger.info("bm_writer ==> "+pMap.get("bm_writer"));
 			
+			pMap.put("bm_no", bm_no);//새로운 글 번호 넣어주기
 			result = bmDao.boardMINS(pMap);
 			//첨부파일이 있을때만 bsDao.boardSINS(pMap);
 		} catch (Exception e) {
