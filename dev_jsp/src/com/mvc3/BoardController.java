@@ -46,13 +46,17 @@ public class BoardController implements Controller2020 {
 			pMap.put("bm_no", req.getParameter("bm_no"));
 //			mList = bLogic.proc_boardList(pMap);
 			mList = bLogic.boardList(pMap);
-			req.setAttribute("boardDetatil", mList);
+			req.setAttribute("boardDetail", mList);
 			return path = "forward:read.jsp";//pagemove[]
 		}
 		//너 입력하려구
 		else if("boardINS".equals(requestName)) {
 			int result = 0;
 			Map<String, Object> pMap = new HashMap<String, Object>();
+			pMap.put("bm_no", req.getParameter("bm_no"));
+			pMap.put("bm_group", req.getParameter("bm_group"));
+			pMap.put("bm_pos", req.getParameter("bm_pos"));
+			pMap.put("bm_step", req.getParameter("bm_step"));
 			pMap.put("bm_title", req.getParameter("bm_title"));
 			pMap.put("bm_writer", req.getParameter("bm_writer"));
 			pMap.put("bm_email", req.getParameter("bm_email"));

@@ -71,6 +71,16 @@ public class BoardMDao {
 		sqlSec.commit(true);
 		return result;
 	}
+	
+	public int bmStepUpdate(Map<String, Object> pMap) {
+		//insert here
+		logger.info("bmStepUpdate 호출성공");
+		int result = 0;
+		result = sqlSec.update("bmStepUpdate",pMap);
+		logger.info("result: "+result);
+		sqlSec.commit(true);
+		return result;
+	}
 
 	public int boardUPD(Map<String, Object> pMap) {
 		//insert here

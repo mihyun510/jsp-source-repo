@@ -23,3 +23,22 @@ board/boardList.mvc3?cud=INS
 					&bm_group=3
 
 
+
+board_master_t = > 글등록, bm_group, bm_pos, bm.bm_step
+
+board_sub_t => 첨부파일 추가할 때
+
+화면에 없는 컬럼 챙기기 - crew
+
+오라클 - 조인, 서브쿼리, 인라인 뷰
+
+쿠키생성, 수정, 삭제
+
+세션생성, 수정, 삭제
+
+화면 정의서에 작성할것
+- select문 미리 작성할것
+- jsp - action[forward] -jsp
+
+서버를 다시 껏다가 켜야될 경우
+
