@@ -34,6 +34,7 @@
 	    rbm_step = rmap.get("BM_STEP").toString();
 	    rbm_pw = rmap.get("BM_PW").toString();
     }
+    out.print("DB에서 가져온 비번: "+rbm_pw);
     %>
 <!DOCTYPE html>
 <html>
@@ -43,6 +44,23 @@
 <!-- 공통코드 영역(화면공통코드, 인증처리)-->
 <%@include file ="../common/jEasyUICommon.jsp" %>
 <script type="text/javascript">
+	function updateForm(){
+		alert('boardUpdView 호출 성공');
+		$("#d_boardUpd").dialog({
+			//페이지 이동을 시켜야 된다.
+			title:'글수정'
+			, buttons:btn_boardDel 
+			, width: 720
+			, height: 450
+			, closed: true
+			, cache: false
+			<%-- , href: 'updateView.mvc3?cud=SEL&bm_no=<%=rbm_no%>' --%>
+			, href: 'boardUpdForm.jsp?bm_title=<%=rbm_title%>'
+			, modal: true
+		});
+		$("#d_boardUpd").dialog('open');
+		<%-- $("#ubm_title").textbox('setValue','<%=rbm_title%>'); --%>
+	}
 	function repleForm(){
 		$("#dlg_boardAdd").dialog('open');
 	}
@@ -51,6 +69,38 @@
 		$("#f_boardAdd").attr("method","get");
 		$("#f_boardAdd").attr("action","./boardINS.mvc3");
 		$("#f_boardAdd").submit();
+	}
+	function boardDel(){
+		var db_pw = <%=rbm_pw%>
+		var u_pw = $("#u_pw").textbox('getValue');
+		//사용자가 입력한 비번과 DB에서 가져온 비번을 비교한다.
+		if(u_pw==db_pw){//스크립트 문자열 비교는 ==로 한다.
+			$.messager.confirm('Confirm', '정말 삭제하시겠습니까?', function(r){
+				if(r){
+					location.href="./boardDel.mvc3?cud=DEL&bm_no=<%=rbm_no%>"
+				}
+			});
+		}else{
+			$('#u_pw').textbox('setValue','');
+		}
+	}
+	function boardDelClose(){
+		$("#d_boardDel").dialog('close');
+	}
+	function boardDelView(){
+		alert('boardDelView 호출 성공');
+		$("#d_boardDel").dialog({
+			//페이지 이동을 시켜야 된다.
+			title:'글삭제'
+			, buttons:btn_boardDel 
+			, width: 420
+			, height: 250
+			, closed: true
+			, cache: false
+			, href: 'boardDelForm.jsp?bm_no=<%=rbm_no%>&bm_pw=<%=rbm_pw%>'
+			, modal: true
+		});
+		$("#d_boardDel").dialog('open');
 	}
 </script>
 </head>

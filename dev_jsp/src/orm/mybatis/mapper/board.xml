@@ -63,4 +63,7 @@
            			), 0)+1 bm_no 
   			 from dual
 	</select>
+	<delete id="boardDEL" parameterType="map">
+		DELETE FROM board_master_t WHERE bm_no=#{bm_no}
+	</delete>
 </mapper>

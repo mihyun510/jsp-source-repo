@@ -113,7 +113,7 @@ public class BoardLogic {
 	}
 
 	public int boardDEL(Map<String, Object> pMap) {
-		logger.info("boardDEL호출");
+		logger.info("boardDEL호출"+pMap.get("bm_no"));
 		int result = 0;
 		result = bmDao.boardDEL(pMap);
 		return result;

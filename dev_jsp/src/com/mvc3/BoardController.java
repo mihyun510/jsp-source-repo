@@ -49,6 +49,16 @@ public class BoardController implements Controller2020 {
 			req.setAttribute("boardDetail", mList);
 			return path = "forward:read.jsp";//pagemove[]
 		}
+		else if("updateView".equals(requestName)) {
+			logger.info("updateView 호출성공");
+			List<Map<String, Object>> mList = null;
+			Map<String, Object> pMap = new HashMap<String, Object>();
+			pMap.put("bm_no", req.getParameter("bm_no"));
+//			mList = bLogic.proc_boardList(pMap);
+			mList = bLogic.boardList(pMap);
+			req.setAttribute("updateView", mList);
+			return path = "redirect:boardUpd.jsp";//pagemove[]
+		}
 		//너 입력하려구
 		else if("boardINS".equals(requestName)) {
 			int result = 0;
@@ -78,6 +88,7 @@ public class BoardController implements Controller2020 {
 		else if("boardDEL".equals(requestName)) {
 			int result = 0;
 			Map<String, Object> pMap = new HashMap<String, Object>();
+			pMap.put("bm_no", req.getParameter("bm_no"));
 			result = bLogic.boardDEL(pMap);
 			if(result==1) path = "redirect:boardDelOk.jsp";
 			else if (result==0) path = "redirect:boardDelFail.jsp";

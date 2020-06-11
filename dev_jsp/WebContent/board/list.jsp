@@ -44,6 +44,7 @@
 <%@include file ="../common/jEasyUICommon.jsp" %>
 </head>
 <body>
+<h1>계층형 게시판 구현</h1><hr>
  	<table id="dg" title="My Users" class="easyui-datagrid" style="width:750px;height:250px"
             toolbar="#toolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true">

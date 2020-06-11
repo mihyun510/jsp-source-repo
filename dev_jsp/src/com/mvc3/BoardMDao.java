@@ -90,7 +90,11 @@ public class BoardMDao {
 
 	public int boardDEL(Map<String, Object> pMap) {
 		//insert here
-		logger.info("boardDEL호출성공");
+		logger.info("boardDEL호출성공 "+pMap.get("bm_no"));
+		int result = 0;
+		result = sqlSec.update("boardDEL",pMap);
+		logger.info("result: "+result);
+		sqlSec.commit(true);
 		return 0;
 	}
 

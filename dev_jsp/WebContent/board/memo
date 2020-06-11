@@ -42,3 +42,17 @@ board_sub_t => 첨부파일 추가할 때
 
 서버를 다시 껏다가 켜야될 경우
 
+
+ajax로 처리할 때
+
+json에서 값을 읽어서 자바에서 사용해야 함
+
+var result = JSON.stringify(data);
+
+var v_x = <%="10%> 
+<%=%>로 처리하기
+String s
+int i 
+
+<%= %> 로 처리할 때
+
