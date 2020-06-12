@@ -20,8 +20,9 @@
 <!-- 새글 일때[list.jsp -> 글쓰기 버튼을 누르면] 
 	새글과 댓글은 어떻게 구분하나요?
 -->
-<form id="f_write">
+<form id="f_write" method="post" enctype="multipart/form-data">
 <!-- 팝업으로 처리하기 -->
+<!-- 히든도 겟이기 떄문에 값이 안넘어간다. 그러니 multibind로 넘겨야된다. -->
 <input type="hidden" name="cud" value="INS"><!-- 화면에는 보이지 않으면서 서버로 전달해야하는 값이 있다면 hidden사용 -->
 	<table align="center" id="p" class="easyui-panel" title="글상세보기" data-options="footer:'#tb_read'"
         style="width:670px;height:380px;padding:10px;background:#fafafa;">

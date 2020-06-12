@@ -1,6 +1,8 @@
 package com.mvc3;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+
+import com.util.HashMapBinder;
 
 public class ActionSupport extends HttpServlet{
 	
@@ -53,8 +57,12 @@ public class ActionSupport extends HttpServlet{
 //		crud= req.getParameter("crud");
 //		logger.info("crud===>"+crud); //입력받은 crud의 값이 담김. 
 		//insert here - 인스턴스화 and process call
-		String cud = req.getParameter("cud");
-		logger.info("cud: "+cud);
+		String cud = req.getParameter("cud"); //현재 포스트방식을 쓰므로 값이 안담긴다.
+		Map<String, Object> cudMap = new HashMap<String, Object>();
+		HashMapBinder hmb = new HashMapBinder(req);
+		hmb.multBind(cudMap);
+		//logger.info("cud: "+cud);
+		logger.info("cud: "+cudMap.get(cud));
 		try {//여기서 들어온 uri를 가공하여 업무/업무이름과 같이 넘어온 데이터 값 받아서 넘겨주기, uri에서 컨텍스트 패스를 제외한 값을 넘기는 것이고, requestURI에는 쿼리스트링 값이 담기지 않으니 따로 getparameter을 통해서 crud의 입력값을 받아서 그 값을 구현체클래스와 이어주는 mapper클래스로 넘김.
 			//어떤 컨트롤러를 탈지는 폴더이름으로 결정한다. 그리고 업무이름은 요청이 들어온 페이지 이름으로 결정한다.
 //			controller = controllerMapper3.getController(command, crud); //인터페이스하고 여러가지의 구현체클래스를 이어주는 맵퍼클래스를 생성하여 사용. 인터페이스로 선언하고 해당 경우에 따라서 적절한 구현체 클래스로 인스턴스화함.

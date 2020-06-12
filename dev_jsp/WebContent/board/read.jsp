@@ -44,6 +44,13 @@
 <!-- 공통코드 영역(화면공통코드, 인증처리)-->
 <%@include file ="../common/jEasyUICommon.jsp" %>
 <script type="text/javascript">
+	function boardUpd(){
+		alert("저장호출 성공");
+		$("#uf_board").attr("method","get");
+		$("#uf_board").attr("action","./boardUPD.mvc3");
+		$("#uf_board").submit();
+	}
+	
 	function updateForm(){
 		alert('boardUpdView 호출 성공');
 		$("#d_boardUpd").dialog({
@@ -52,10 +59,10 @@
 			, buttons:btn_boardDel 
 			, width: 720
 			, height: 450
-			, closed: true
+			, closed: false
 			, cache: false
 			<%-- , href: 'updateView.mvc3?cud=SEL&bm_no=<%=rbm_no%>' --%>
-			, href: 'boardUpdForm.jsp?bm_title=<%=rbm_title%>'
+			<%-- , href: 'boardUpdForm.jsp?bm_title=<%=rbm_title%>' --%>
 			, modal: true
 		});
 		$("#d_boardUpd").dialog('open');
@@ -149,6 +156,44 @@
 		<!-- 글삭제  끝   -->
 		<!-- 글수정 시작 -->
 		<div id="d_boardUpd" closed="true" class="easyui-dialog" style="padding:20px 50px">
+<!-- ===================================================================================================== -->
+			<form id="uf_board" method="post" enctype="multipart/form-data">
+			<input type="hidden"  name="cud" value="UPD">
+			<input type="hidden" id="bm_no" name="bm_no" value="<%=rbm_no %>">
+			<table align="center" width="650px" height="280px">
+				<tr>
+					<td width="120px">글제목</td>
+					<td width="580px">
+						<input id="ubm_title" value="<%=rbm_title%>" name="bm_title" class="easyui-textbox">
+					</td>
+				</tr>
+				<tr>
+					<td width="120px">작성자</td>
+					<td width="580px">
+						<input id="ubm_writer" value="<%=rbm_writer%>" name="bm_writer" class="easyui-textbox">
+					</td>
+				</tr>	
+				<tr>
+					<td width="120px">내용</td>
+					<td width="580px">
+						<input id="ubm_content" value="<%=rbm_content%>" name="bm_content" class="easyui-textbox" style="width:100%;height:100px">
+					</td>
+				</tr>	
+				<%-- <tr>
+					<td width="120px">첨부파일</td>
+					<td width="580px">
+						<input id="bs_file" value="<%=bs_file%>" name="bs_file" class="easyui-filebox" style="width:100%">
+					</td>
+				</tr>	 --%>
+				<tr>
+					<td width="120px">비번</td>
+					<td width="580px">
+						<input id="ubm_pw" value="<%=rbm_pw%>" name="bm_pw" class="easyui-textbox" style="width:100px">
+					</td>
+				</tr>	
+			</table>
+			</form>
+<!-- ===================================================================================================== -->		
 			<div id="btn_boardUpd" align="right">
 			<a href="javascript:boardUpd()" class="easyui-linkbutton" iconCls="icon-ok" style="width:90px">등록</a>
 			<a href="javascript:boardUpdClose()" class="easyui-linkbutton" iconCls="icon-cancel" style="width:90px">닫기</a>

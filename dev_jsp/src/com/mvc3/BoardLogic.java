@@ -87,8 +87,12 @@ public class BoardLogic {
 			//데이터 유효성 체크 코드 추가
 			//크루는 PL로 부터 소스를 받으면 제일 먼저 단위테스트를 수행
 			//주의사항:테이블 컬럼을 사용자로 부터 입력받는 값과 개발자끼리만 공유하는 값
+			logger.info("bs_file ==> "+pMap.get("bs_file"));
+			logger.info("bs_size ==> "+pMap.get("bs_size"));
 			logger.info("bm_no ==> "+pMap.get("bm_no"));
 			logger.info("bm_group ==> "+pMap.get("bm_group"));//여기서 배달사고가 난것입니다. 댓글인 경우 새로운 그룹번호가 아닌 자신이 상세조회한 그룹번호를 가지고 와야됨.
+			logger.info("bm_pos ==> "+pMap.get("bm_pos"));//여기서 배달사고가 난것입니다. 댓글인 경우 새로운 그룹번호가 아닌 자신이 상세조회한 그룹번호를 가지고 와야됨.
+			logger.info("bm_step ==> "+pMap.get("bm_step"));//여기서 배달사고가 난것입니다. 댓글인 경우 새로운 그룹번호가 아닌 자신이 상세조회한 그룹번호를 가지고 와야됨.
 			logger.info("bm_title ==> "+pMap.get("bm_title"));
 			logger.info("bm_content ==> "+pMap.get("bm_content"));
 			logger.info("bm_email ==> "+pMap.get("bm_email"));

@@ -35,7 +35,7 @@
 		}
 		function board_ins(){
 			alert("저장호출 성공");
-			$("#f_write").attr("method","get");
+			$("#f_write").attr("method","post");
 			$("#f_write").attr("action","./boardINS.mvc3");
 			$("#f_write").submit();
 		}
