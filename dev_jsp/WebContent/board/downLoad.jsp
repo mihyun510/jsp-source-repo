@@ -6,7 +6,8 @@
    String fname = bs_file;
    out.print("bs_file: 8->euc"+bs_file);      
    out.print("<br>");      
-   String filePath = "C://workspace_jsp//dev_jsp//WebContent//pds//"; // 절대경로.   
+  // String filePath = "C://workspace_jsp//dev_jsp//WebContent//pds//"; // 절대경로.   
+   String filePath = "C:\\kmh\\git_kosmo\\git_jsp\\jsp-source-repo\\dev_jsp\\WebContent\\pds\\"; // 절대경로.   
    File file = new File(filePath,bs_file.trim());
     String mimeType = getServletContext().getMimeType(file.toString());
    if(mimeType == null){

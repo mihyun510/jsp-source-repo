@@ -99,11 +99,22 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="writeForm()">글쓰기</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="boardList()">조회</a>
     </div>
+    <table border="1" style="width:750px; height:50px">
+    	<tr>
+    		<!-- <td align="center"> 1 2 3 4 5 6 7 8 9 10</td> --><!-- 부트스트랩에서 페이징 처리를 할때 사용할 코드 -->
+    		<td align="center"> 
+<%
+ 			   			
+%>
+    		</td>
+    	</tr>
+    
+    </table>
     <!-- list.jsp: A학생, writeForm.jsp: B학생 -->
     <!--=============================[[ 글쓰기 화면 처리 시작]]================================== -->
 	<div id="dlg_write" class="easyui-dialog" data-options="closed:true">
 		<!-- B학생이 머지해야되는 공간, 개발할때 업무를 나누어서 할때 훨신 효과적으로 개발가능 -->
-		아무말대잔치
+		
 	</div>
     <!--=============================[[ 글쓰기 화면 처리 끝]]====================================  -->
 </body>

@@ -16,8 +16,8 @@ public class PageBar {
    //현재 내가 바라보는 블럭 수
    private int nowBlock;
    //적용할 페이지 이름
-   private String pagePath;
-   private String pagination;
+   private String pagePath;//boardList.mvc3?cud=sel
+   private String pagination; //스트링
    public PageBar(int numPerPage, int totalRecord, int nowPage, String pagePath) {
       this.numPerPage = numPerPage;
       this.totalRecord = totalRecord;
@@ -39,9 +39,10 @@ public class PageBar {
          //nowBlock이 0보다 클때 처리
          //이전 페이지로 이동 해야 하므로 페이지 번호에 a태그를 붙여야 하고
          //pagePath뒤에 이동할 페이지 번호를 붙여서 호출 해야함.
-         if(nowBlock > 0 ) {                                    //(1-1)*2+(2-1)=1
+         if(nowBlock > 0 ) {                      //┌>현재내가바라보는페이지//(1-1)*2+(2-1)=1
             pageLink.append("<a href='"+pagePath+"&nowPage="+((nowBlock-1)*pagePerBlock+(pagePerBlock-1))+"'>");
-            pageLink.append("<img border=0 src='/images/bu_a.gif'>");
+//            pageLink.append("<img border=0 src='/images/bu_a.gif'>");
+            pageLink.append("<img border=0 src='./bu_a.gif'>");//상대경로
             pageLink.append("</a>&nbsp;&nbsp;");
          }
          for(int i=0;i<pagePerBlock;i++) {
@@ -71,7 +72,7 @@ public class PageBar {
    //getter메소드 선언
    public String getPageBar() {
       this.setPageBar();
-      return pagination;
+      return pagination;//여기에다가 toString으로 화살표이미지와 숫자를 모두 붙혀놓은것이다.
    }
 }
 
