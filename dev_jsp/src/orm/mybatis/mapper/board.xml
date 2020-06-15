@@ -29,7 +29,8 @@
 	</insert>
 	<!-- 밑에 두개를 묶어서 프로시저로 만들자  -->
 	<insert id="boardSINS" parameterType="map">
-		INSERT INTO board_sub_t(bm_no) VALUES(#{bm_no})	
+		INSERT INTO board_sub_t(bm_no, bs_seq, bs_file, bs_size) 
+						 VALUES(#{bm_no}, #{bs_seq}, #{bs_file}, #{bs_size})	
 	</insert>
 	<!-- 내 뒤에 댓글이 있다면 update 진행 -->
 	<!-- 개발자에게만 필요한 정보들. 히든으로 처리하기 -->

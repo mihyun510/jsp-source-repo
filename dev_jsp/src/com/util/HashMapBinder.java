@@ -69,7 +69,7 @@ public class HashMapBinder {
 		if(file != null) {
 			size = file.length(); //단위가 바이트 단위
 			size = size/(1024.0);
-			pMap.put("bs_size", size);
+			pMap.put("bs_size", size); //파일의 크기
 		}
 	}
 	public void binder(Map<String, Object> pMap) { //이 함수의 기능은 pMap안에 기존에 있던 키와 값들을 모두 지우고 다시 새롭게 요청받은 값으로 채우는 함수

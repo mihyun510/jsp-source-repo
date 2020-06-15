@@ -79,9 +79,10 @@ public class BoardLogic {
 				}
 			}
 			//첨부파일이 있을까요? - bs_file
-			if(pMap.get("bs_file")!=null) {
+			if(pMap.get("bs_file")!=null && pMap.get("bs_file").toString().length()>=1) { //문자열의 길이가 1보다 크거나 같늬? 왜? 첨부파일이 없을수도있음/ pMap.get("bs_file").toString()여기서 NULL포인트 이셉션이 일어날 걱정은 하지 않아도 됨. 앞에서 NULL체크를 함.
 				logger.info("첨부파일이 있는 경우");
 				int sresult = 0;
+				pMap.put("bs_seq", 1);
 				sresult = bsDao.boardSINS(pMap);//첨부파일이 없을때는 
 			}
 			//데이터 유효성 체크 코드 추가

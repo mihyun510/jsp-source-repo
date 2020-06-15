@@ -13,7 +13,7 @@ public class MyBatisCommonFactory {
 		try {
 			String resource = "orm/mybatis/Configuration.xml";
 			Reader reader = Resources.getResourceAsReader(resource);
-			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader, "development");
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader, "development"); //오라클의 정보를 담고 있다. development/ <environment id="development"> configulation에서 확인할 수 있음.
 			
 		} catch (FileNotFoundException fe) {
 			System.out.println(fe.toString());

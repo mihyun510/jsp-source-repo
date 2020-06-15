@@ -14,11 +14,20 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver" /> <!-- 드라이버클래스 -->
-				<property name="url" value="jdbc:oracle:thin:@192.168.0.24:1521:orcl11" /> <!-- URL -->
+				<property name="url" value="jdbc:oracle:thin:@192.168.0.14:1521:orcl11" /> <!-- URL -->
 				<property name="username" value="${username}" /> <!-- 계정 -->
 				<property name="password" value="tiger" /><!-- 비번 -->
 			</dataSource>
 		</environment>
+		<!-- <environment id="junho"> 여러개의 드라이버 정보를 id로 구별하여 관리할 수 있음.
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" /> 드라이버클래스
+				<property name="url" value="jdbc:oracle:thin:@192.168.0.14:1521:orcl11" /> URL
+				<property name="username" value="${username}" /> 계정
+				<property name="password" value="tiger" />비번
+			</dataSource>
+		</environment> -->
 	</environments>
 	<mappers><!-- s를 보고 여러개가 올 수 있다는 것을 예측가능 -->
 	<!--

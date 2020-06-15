@@ -1,10 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page import="java.io.*,java.net.*" %>    
+<%
+   String bs_file = request.getParameter("bs_file");
+   String fname = bs_file;
+   out.print("bs_file: 8->euc"+bs_file);      
+   out.print("<br>");      
+   String filePath = "C://workspace_jsp//dev_jsp//WebContent//pds//"; // 절대경로.   
+   File file = new File(filePath,bs_file.trim());
+    String mimeType = getServletContext().getMimeType(file.toString());
+   if(mimeType == null){
+      response.setContentType("application/octet-stream");
+   }
+   String downName = null;
+   if(request.getHeader("user-agent").indexOf("MSIE")==-1){
+      downName = new String(bs_file.getBytes("UTF-8"),"8859_1");
+   }else{
+      downName = new String(bs_file.getBytes("EUC-KR"),"8859_1");
+   }
+      response.setHeader("Content-Disposition", "attachment;filename="+downName);
+    FileInputStream fis = new FileInputStream(file);
+   ServletOutputStream sos = response.getOutputStream();
+   try{
+      byte b[] = new byte[1024*10];
+      int data = 0;
+      while((data=(fis.read(b,0,b.length)))!=-1){
+         sos.write(b,0,data);
+      }
+      sos.flush();      
+   }catch(Exception e){
+      out.print(e.toString());
+   }finally{
+      if(sos != null) sos.close();
+      if(fis != null) fis.close();
+   }
+
+%>  
+  
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>다운로드</title>
 </head>
 <body>
 

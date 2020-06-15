@@ -1,0 +1,3 @@
+xml은 1단계 문법체크
+	 2단계 유효한 문서 인가? 여기서 터짐
+parserException SAXExecption 모두 xml 에러 xml확인하자 

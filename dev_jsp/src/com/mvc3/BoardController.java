@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.util.HashMapBinder;
+
 public class BoardController implements Controller2020 {
 	Logger logger = Logger.getLogger(BoardController.class);
 	String requestName = null;
@@ -63,15 +65,17 @@ public class BoardController implements Controller2020 {
 		else if("boardINS".equals(requestName)) {
 			int result = 0;
 			Map<String, Object> pMap = new HashMap<String, Object>();
-			pMap.put("bm_no", req.getParameter("bm_no"));
-			pMap.put("bm_group", req.getParameter("bm_group"));
-			pMap.put("bm_pos", req.getParameter("bm_pos"));
-			pMap.put("bm_step", req.getParameter("bm_step"));
-			pMap.put("bm_title", req.getParameter("bm_title"));
-			pMap.put("bm_writer", req.getParameter("bm_writer"));
-			pMap.put("bm_email", req.getParameter("bm_email"));
-			pMap.put("bm_content", req.getParameter("bm_content"));
-			pMap.put("bm_pw", req.getParameter("bm_pw"));
+//			pMap.put("bm_no", req.getParameter("bm_no"));
+//			pMap.put("bm_group", req.getParameter("bm_group"));
+//			pMap.put("bm_pos", req.getParameter("bm_pos"));
+//			pMap.put("bm_step", req.getParameter("bm_step"));
+//			pMap.put("bm_title", req.getParameter("bm_title"));
+//			pMap.put("bm_writer", req.getParameter("bm_writer"));
+//			pMap.put("bm_email", req.getParameter("bm_email"));
+//			pMap.put("bm_content", req.getParameter("bm_content"));
+//			pMap.put("bm_pw", req.getParameter("bm_pw"));
+			HashMapBinder hmb = new HashMapBinder(req);
+			hmb.multBind(pMap);
 			result = bLogic.boardINS(pMap);
 			if(result==1) path = "redirect:boardInsOk.jsp";
 			else if (result==0) path = "redirect:boardInsFail.jsp";

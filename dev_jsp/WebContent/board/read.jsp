@@ -179,12 +179,12 @@
 						<input id="ubm_content" value="<%=rbm_content%>" name="bm_content" class="easyui-textbox" style="width:100%;height:100px">
 					</td>
 				</tr>	
-				<%-- <tr>
+				<tr>
 					<td width="120px">첨부파일</td>
 					<td width="580px">
-						<input id="bs_file" value="<%=bs_file%>" name="bs_file" class="easyui-filebox" style="width:100%">
+						<input id="bs_file" name="bs_file" class="easyui-filebox" style="width:100%">
 					</td>
-				</tr>	 --%>
+				</tr>	 
 				<tr>
 					<td width="120px">비번</td>
 					<td width="580px">
