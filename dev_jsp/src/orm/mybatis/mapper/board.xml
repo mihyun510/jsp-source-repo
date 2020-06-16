@@ -8,6 +8,12 @@
 	<select id="proc_boardList" parameterType="map" statementType="CALLABLE">
 		{ call proc_boardList(#{key, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=bmap}) }
 	</select>
+	<!-- 토탈레코드를 구하는 쿼리 -->
+	<select id="getTotal" parameterType="map" resultType="int">
+		select count(bm.bm_no)
+		 from board_master_t bm, board_sub_t bs
+		  WHERE bm.bm_no = bs.bm_no(+)
+	</select>
 	<!-- 테이블이 2개인 경우는 앞에 별명을 붙혀주어야 됩니다. 안그러면 헷갈려 해요. -->
 	<select id="boardList" parameterType="map" resultType="map">
 		SELECT  

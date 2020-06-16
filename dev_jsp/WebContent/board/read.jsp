@@ -207,7 +207,7 @@
 form전송시 encType옵션이 추가되면 request객체로 사용자가 입력한 값을 꺼낼 수 없다.
 MultipartRequest  => cos.jar
  -->	<!--                     post로 두면 request.getparameter가 안먹음 -->
-	<form id="f_boardAdd" method="get" enctype="multipart/form-data">
+	<form id="f_boardAdd" method="get">
 	<input type="hidden" name="cud" value="INS">
 	<input type="hidden" name="bm_no" value="<%=rbm_no%>">
 	<input type="hidden" name="bm_group" value="<%=rbm_group%>">

@@ -1,12 +1,23 @@
+<%@page import="com.util.PageBar"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
+    	int tot = 0;
+    	if(session.getAttribute("s_tot")!=null){
+    		tot = Integer.parseInt(session.getAttribute("s_tot").toString());
+    	}
+    	out.print("tot:"+tot);
     	//자바영역 - 서버에서 처리된 결과과 html코드에 합쳐져서 클라이언트 측으로
     	//다운로드 되는 것임
     	//이미 모든 값이 결정된 상태임 - 변경불가함 - 정적임
     	List<Map<String,Object>> boardList = (List<Map<String,Object>>)request.getAttribute("boardList");
+    	int numPerPage = 2;
+    	int nowPage = 0;
+    	if(request.getParameter("nowPage")!=null){
+    		nowPage = Integer.parseInt(request.getParameter("nowPage"));
+    	}
     %>
 <!DOCTYPE html>
 <html>
@@ -33,10 +44,10 @@
 			    modal: true
 			});
 		}
-		function board_ins(){
+		function board_ins(){//새글쓰고 저장버튼
 			alert("저장호출 성공");
 			$("#f_write").attr("method","post");
-			$("#f_write").attr("action","./boardINS.mvc3");
+			$("#f_write").attr("action","./boardINS.mvc3?cud=INS");
 			$("#f_write").submit();
 		}
 	</script>
@@ -62,8 +73,10 @@
         %>
       	<tbody>
       	<%
-        		for(int i=0; i<boardList.size(); i++){
-        			Map<String,Object> rmap = boardList.get(i);
+        		//for(int i=0; i<boardList.size(); i++){
+        		  for(int i = nowPage*numPerPage; i<(nowPage*numPerPage)+numPerPage; i++){
+					if(tot == i) break;
+        			  Map<String,Object> rmap = boardList.get(i);
         %>
         		<tr>
         			<td><%=rmap.get("BM_NO")%></td>
@@ -104,7 +117,12 @@
     		<!-- <td align="center"> 1 2 3 4 5 6 7 8 9 10</td> --><!-- 부트스트랩에서 페이징 처리를 할때 사용할 코드 -->
     		<td align="center"> 
 <%
- 			   			
+ 			  //경로
+ 			  String pagePath = "boardList.mvc3?cud=SEL";
+			  PageBar pb = new PageBar(numPerPage, tot, nowPage, pagePath);
+			  String pagination = pb.getPageBar();
+			  out.print(pagination);
+			  
 %>
     		</td>
     	</tr>

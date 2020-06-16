@@ -19,6 +19,16 @@ public class BoardMDao {
 		sqlMapper = new MyBatisCommonFactory().getSqlSessionFactory();
 		sqlSec = sqlMapper.openSession();
 	}
+	
+	//토탈 레코드를 구하는 다오
+	public int getTotal(Map<String, Object> pMap) {
+		//insert here
+		logger.info("getTotal호출성공");
+		int tot = 0;
+		tot = sqlSec.selectOne("getTotal",pMap);
+		logger.info("tot: "+tot);//null이면 nullpointException이 뜰것이다.
+		return tot;
+	}
 	public List<Map<String, Object>> boardList(Map<String, Object> pMap) {
 		//insert here
 		logger.info("boardList호출성공"+pMap.get("bm_no"));
